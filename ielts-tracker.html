@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIÊN BẢN ĐIỂM THI THỬ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --paper-2:#F1EBD9;
+    --card:#FFFFFF;
+    --navy:#1E2A4A;
+    --navy-soft:#3C4A72;
+    --gold:#B8860B;
+    --gold-soft:#8A6400;
+    --gold-fill:#D9A93C;
+    --crimson:#A13D3D;
+    --sage:#3F7A54;
+    --sky:#2E6E8E;
+    --plum:#6B4E8E;
+    --text-ink:#232323;
+    --text-muted:#6B6455;
+    --line:rgba(30,42,74,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 15% -10%, rgba(184,134,11,0.08), transparent 45%),
+      radial-gradient(ellipse at 100% 0%, rgba(30,42,74,0.06), transparent 40%),
+      var(--paper);
+    color:var(--text-ink);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+  .wrap{max-width:900px; margin:0 auto;}
+
+  .folder-tab{display:flex; align-items:center; gap:10px; margin-bottom:2px; flex-wrap:wrap;}
+  .tab{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-bottom:none;
+    padding:8px 18px 12px;
+    border-radius:8px 8px 0 0;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--navy-soft);
+  }
+  .tab.active{background:var(--card); color:var(--navy); font-weight:700;}
+
+  header.dossier{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:0 10px 10px 10px;
+    padding:28px 28px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+    box-shadow:0 4px 20px rgba(30,42,74,0.06);
+  }
+  .dossier-title-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    color:var(--text-muted);
+    margin-bottom:8px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:clamp(26px,4vw,36px);
+    color:var(--navy);
+    line-height:1.1;
+  }
+  .subject-line{margin-top:10px; font-size:14px; color:var(--text-muted); outline:none; border-radius:4px; padding:2px 4px; margin-left:-4px;}
+  .subject-line b{color:var(--gold-soft); font-weight:600;}
+  .subject-line:focus{background:var(--paper-2);}
+  .edit-hint{font-size:10.5px; color:var(--text-muted); opacity:0.7; margin-top:4px; font-style:italic;}
+
+  .seal{
+    width:104px; height:104px;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, var(--gold-fill), var(--gold) 60%, #8a6400 100%);
+    border:3px solid #7a5f16;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#2A1F05;
+    flex-shrink:0;
+    box-shadow: 0 6px 18px rgba(184,134,11,0.25);
+    transform:rotate(-4deg);
+  }
+  .seal .level-label{font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em;}
+  .seal .level-num{font-family:'Fraunces',serif; font-weight:700; font-size:28px; line-height:1;}
+  .seal .level-rank{font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.05em; text-align:center; margin-top:2px; padding:0 8px;}
+  .seal-caption{font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--navy-soft); text-align:center; margin-top:8px;}
+
+  section{margin-top:36px;}
+  .section-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    color:var(--gold-soft);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .section-eyebrow::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, rgba(184,134,11,0.4), transparent);}
+  h2.section-title{font-family:'Fraunces', serif; font-weight:600; font-size:22px; color:var(--navy); margin-bottom:4px;}
+  .section-desc{font-size:13px; color:var(--text-muted); margin-bottom:18px; max-width:64ch;}
+
+  /* ---------- RECORD CARDS ---------- */
+  .records{display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+  @media(max-width:760px){.records{grid-template-columns:repeat(2,1fr);}}
+  .record-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:3px solid var(--gold);
+    border-radius:6px;
+    padding:14px 12px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  .record-card.overall{border-top-color:var(--crimson);}
+  .record-letter{font-family:'JetBrains Mono', monospace; font-size:9.5px; letter-spacing:0.1em; color:var(--text-muted);}
+  .record-name{font-family:'Fraunces', serif; font-weight:600; font-size:13.5px; color:var(--navy); margin-top:2px;}
+  .record-score{font-family:'Fraunces', serif; font-weight:700; font-size:30px; color:var(--gold-soft); margin-top:6px;}
+  .record-card.overall .record-score{color:var(--crimson);}
+  .record-date{font-family:'JetBrains Mono', monospace; font-size:9.5px; color:var(--text-muted); margin-top:4px;}
+
+  /* ---------- CHART ---------- */
+  .chart-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  .legend{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:12px; font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--text-muted);}
+  .legend span{display:inline-flex; align-items:center; gap:5px;}
+  .legend i{width:10px; height:10px; border-radius:50%; display:inline-block;}
+  .chart-empty{font-size:13px; color:var(--text-muted); text-align:center; padding:30px 0;}
+
+  /* ---------- FORM ---------- */
+  .form-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  .form-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; align-items:end;}
+  @media(max-width:700px){.form-grid{grid-template-columns:repeat(2,1fr);}}
+  .field{display:flex; flex-direction:column; gap:5px;}
+  .field label{font-family:'JetBrains Mono', monospace; font-size:9.5px; letter-spacing:0.08em; color:var(--text-muted);}
+  .field input{
+    font-family:'Inter', sans-serif;
+    font-size:15px;
+    color:var(--navy);
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:6px;
+    padding:8px 10px;
+    outline:none;
+  }
+  .field input:focus{border-color:var(--gold);}
+  .overall-preview{
+    grid-column:span 1;
+    text-align:center;
+    background:var(--paper-2);
+    border-radius:6px;
+    padding:8px 6px;
+  }
+  .overall-preview .label{font-family:'JetBrains Mono', monospace; font-size:9px; color:var(--text-muted);}
+  .overall-preview .num{font-family:'Fraunces', serif; font-weight:700; font-size:22px; color:var(--crimson);}
+  .submit-row{margin-top:16px; display:flex; justify-content:flex-end;}
+  .btn-primary{
+    background:var(--navy);
+    color:#F0D989;
+    border:none;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.05em;
+    padding:11px 22px;
+    border-radius:6px;
+    cursor:pointer;
+  }
+  .btn-primary:hover{background:var(--navy-soft);}
+
+  /* ---------- HISTORY TABLE ---------- */
+  .history-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  thead th{
+    background:var(--navy);
+    color:#F0D989;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-align:left;
+    padding:10px 12px;
+  }
+  tbody td{padding:10px 12px; border-bottom:1px solid var(--line); font-family:'JetBrains Mono', monospace; font-size:12.5px;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--paper-2);}
+  td.overall-cell{font-weight:700; color:var(--crimson);}
+  td.record-cell{position:relative;}
+  .badge-record{
+    display:inline-block;
+    font-size:9px;
+    background:var(--gold);
+    color:#2A1F05;
+    padding:1px 5px;
+    border-radius:3px;
+    margin-left:5px;
+    letter-spacing:0.03em;
+  }
+  .del-btn{
+    background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:14px;
+  }
+  .del-btn:hover{color:var(--crimson);}
+  .empty-row td{text-align:center; color:var(--text-muted); font-style:italic; padding:24px;}
+
+  footer{margin-top:48px; font-size:11.5px; color:var(--text-muted); text-align:center; line-height:1.6;}
+  .reset-btn{
+    margin-top:14px; background:transparent; border:1px solid var(--line); color:var(--text-muted);
+    font-family:'JetBrains Mono', monospace; font-size:11px; padding:6px 12px; border-radius:6px; cursor:pointer;
+  }
+  .reset-btn:hover{border-color:var(--crimson); color:var(--crimson);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="folder-tab">
+    <div class="tab">HỒ SƠ NHÂN VẬT</div>
+    <div class="tab active">BIÊN BẢN ĐIỂM</div>
+  </div>
+
+  <header class="dossier">
+    <div>
+      <div class="dossier-title-eyebrow">SỐ BIÊN BẢN: IELTS-TRACK-01</div>
+      <h1>Biên Bản Điểm Thi Thử</h1>
+      <div class="subject-line" contenteditable="true" spellcheck="false">
+        Mục tiêu: <b>7.0 trở lên</b> ở cả 4 kỹ năng · Theo dõi mọi lần thi thử để thấy tiến độ thật
+      </div>
+      <div class="edit-hint">✎ Nhấn vào dòng trên để chỉnh sửa trực tiếp</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="seal">
+        <div class="level-label">KỶ LỤC</div>
+        <div class="level-num" id="bestOverallSeal">—</div>
+        <div class="level-rank">TỔNG ĐIỂM<br>CAO NHẤT</div>
+      </div>
+      <div class="seal-caption" id="attemptCount">0 lần thi thử</div>
+    </div>
+  </header>
+
+  <!-- ============ RECORDS ============ -->
+  <section>
+    <div class="section-eyebrow">MỤC A–E</div>
+    <h2 class="section-title">Điểm Kỷ Lục</h2>
+    <p class="section-desc">Điểm cao nhất bạn từng đạt ở mỗi kỹ năng, tính trên toàn bộ lịch sử thi thử.</p>
+    <div class="records" id="records">
+      <div class="record-card" data-key="l">
+        <div class="record-letter">MỤC A</div>
+        <div class="record-name">Listening</div>
+        <div class="record-score">—</div>
+        <div class="record-date">Chưa có dữ liệu</div>
+      </div>
+      <div class="record-card" data-key="r">
+        <div class="record-letter">MỤC B</div>
+        <div class="record-name">Reading</div>
+        <div class="record-score">—</div>
+        <div class="record-date">Chưa có dữ liệu</div>
+      </div>
+      <div class="record-card" data-key="w">
+        <div class="record-letter">MỤC C</div>
+        <div class="record-name">Writing</div>
+        <div class="record-score">—</div>
+        <div class="record-date">Chưa có dữ liệu</div>
+      </div>
+      <div class="record-card" data-key="s">
+        <div class="record-letter">MỤC D</div>
+        <div class="record-name">Speaking</div>
+        <div class="record-score">—</div>
+        <div class="record-date">Chưa có dữ liệu</div>
+      </div>
+      <div class="record-card overall" data-key="overall">
+        <div class="record-letter">MỤC E</div>
+        <div class="record-name">Tổng điểm</div>
+        <div class="record-score">—</div>
+        <div class="record-date">Chưa có dữ liệu</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHART ============ -->
+  <section>
+    <div class="section-eyebrow">DIỄN BIẾN</div>
+    <h2 class="section-title">Biểu Đồ Tiến Độ</h2>
+    <p class="section-desc">Theo dõi 4 kỹ năng và tổng điểm qua từng lần thi thử theo thời gian.</p>
+    <div class="chart-card">
+      <div class="legend">
+        <span><i style="background:var(--sky)"></i>Listening</span>
+        <span><i style="background:var(--sage)"></i>Reading</span>
+        <span><i style="background:var(--plum)"></i>Writing</span>
+        <span><i style="background:var(--gold)"></i>Speaking</span>
+        <span><i style="background:var(--crimson)"></i>Tổng điểm</span>
+      </div>
+      <div id="chartContainer"><div class="chart-empty">Chưa có dữ liệu để vẽ biểu đồ — ghi điểm lần thi thử đầu tiên bên dưới.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ ADD ENTRY FORM ============ -->
+  <section>
+    <div class="section-eyebrow">GHI NHẬN MỚI</div>
+    <h2 class="section-title">Thêm Lần Thi Thử</h2>
+    <p class="section-desc">Nhập điểm từng kỹ năng — điểm tổng sẽ tự tính theo đúng cách IELTS làm tròn (0.25 làm tròn lên 0.5, 0.75 làm tròn lên nguyên).</p>
+    <div class="form-card">
+      <div class="form-grid">
+        <div class="field">
+          <label for="fDate">NGÀY THI</label>
+          <input type="date" id="fDate">
+        </div>
+        <div class="field">
+          <label for="fL">LISTENING</label>
+          <input type="number" id="fL" min="0" max="9" step="0.5" placeholder="0–9">
+        </div>
+        <div class="field">
+          <label for="fR">READING</label>
+          <input type="number" id="fR" min="0" max="9" step="0.5" placeholder="0–9">
+        </div>
+        <div class="field">
+          <label for="fW">WRITING</label>
+          <input type="number" id="fW" min="0" max="9" step="0.5" placeholder="0–9">
+        </div>
+        <div class="field">
+          <label for="fS">SPEAKING</label>
+          <input type="number" id="fS" min="0" max="9" step="0.5" placeholder="0–9">
+        </div>
+      </div>
+      <div class="form-grid" style="margin-top:14px;">
+        <div class="field" style="grid-column:span 3;">
+          <label for="fNote">GHI CHÚ (tuỳ chọn)</label>
+          <input type="text" id="fNote" placeholder="VD: Thi thử tại trung tâm ABC">
+        </div>
+        <div class="overall-preview" style="grid-column:span 2;">
+          <div class="label">ĐIỂM TỔNG (tự tính)</div>
+          <div class="num" id="overallPreview">—</div>
+        </div>
+      </div>
+      <div class="submit-row">
+        <button class="btn-primary" onclick="addEntry()">+ Ghi vào biên bản</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HISTORY ============ -->
+  <section>
+    <div class="section-eyebrow">TOÀN BỘ HỒ SƠ</div>
+    <h2 class="section-title">Lịch Sử Thi Thử</h2>
+    <p class="section-desc">Mọi lần thi thử, mới nhất ở trên. Điểm đạt kỷ lục lúc đó sẽ có nhãn vàng.</p>
+    <div class="history-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Ngày</th><th>Listening</th><th>Reading</th><th>Writing</th><th>Speaking</th><th>Tổng</th><th>Ghi chú</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="historyBody">
+          <tr class="empty-row"><td colspan="8">Chưa có lần thi thử nào được ghi lại.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Dữ liệu được tự động lưu trên trình duyệt này (localStorage) — mở lại trang vẫn còn nguyên.<br>
+    Muốn xem được từ nhiều thiết bị thì cần nối thêm database thật như <code>Supabase</code>.<br>
+    <button class="reset-btn" onclick="resetAll()">🗑️ Xoá toàn bộ biên bản</button>
+  </footer>
+
+</div>
+
+<script>
+  const STORAGE_KEY = 'ieltsTracker_v1';
+  let entries = [];
+
+  const skillMeta = {
+    l:{name:'Listening', color:'var(--sky)'},
+    r:{name:'Reading', color:'var(--sage)'},
+    w:{name:'Writing', color:'var(--plum)'},
+    s:{name:'Speaking', color:'var(--gold)'},
+    overall:{name:'Tổng điểm', color:'var(--crimson)'}
+  };
+
+  function roundBand(avg){
+    const base = Math.floor(avg);
+    const rem = avg - base;
+    if(rem < 0.25) return base;
+    if(rem < 0.75) return base + 0.5;
+    return base + 1;
+  }
+
+  function calcOverall(l,r,w,s){
+    const avg = (l+r+w+s)/4;
+    return roundBand(avg);
+  }
+
+  function fmt(n){
+    if(n === null || n === undefined || isNaN(n)) return '—';
+    return Number(n).toFixed(1).replace(/\.0$/,'.0');
+  }
+
+  function fmtDate(iso){
+    if(!iso) return '';
+    const [y,m,d] = iso.split('-');
+    return d+'/'+m+'/'+y;
+  }
+
+  // ---- live overall preview while typing ----
+  ['fL','fR','fW','fS'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', updatePreview);
+  });
+  function updatePreview(){
+    const l = parseFloat(document.getElementById('fL').value);
+    const r = parseFloat(document.getElementById('fR').value);
+    const w = parseFloat(document.getElementById('fW').value);
+    const s = parseFloat(document.getElementById('fS').value);
+    const preview = document.getElementById('overallPreview');
+    if([l,r,w,s].some(v=>isNaN(v))){ preview.textContent = '—'; return; }
+    preview.textContent = fmt(calcOverall(l,r,w,s));
+  }
+
+  function addEntry(){
+    const date = document.getElementById('fDate').value;
+    const l = parseFloat(document.getElementById('fL').value);
+    const r = parseFloat(document.getElementById('fR').value);
+    const w = parseFloat(document.getElementById('fW').value);
+    const s = parseFloat(document.getElementById('fS').value);
+    const note = document.getElementById('fNote').value.trim();
+
+    if(!date || [l,r,w,s].some(v=>isNaN(v) || v<0 || v>9)){
+      alert('Vui lòng nhập ngày và đủ 4 điểm (0–9) trước khi ghi vào biên bản.');
+      return;
+    }
+    const overall = calcOverall(l,r,w,s);
+    entries.push({date, l, r, w, s, overall, note});
+
+    document.getElementById('fDate').value = '';
+    document.getElementById('fL').value = '';
+    document.getElementById('fR').value = '';
+    document.getElementById('fW').value = '';
+    document.getElementById('fS').value = '';
+    document.getElementById('fNote').value = '';
+    document.getElementById('overallPreview').textContent = '—';
+
+    save();
+    renderAll();
+  }
+
+  function deleteEntry(idx){
+    if(!confirm('Xoá lần thi thử này khỏi biên bản?')) return;
+    entries.splice(idx,1);
+    save();
+    renderAll();
+  }
+
+  function getRecords(){
+    const rec = {l:null, r:null, w:null, s:null, overall:null};
+    entries.forEach(e=>{
+      ['l','r','w','s','overall'].forEach(k=>{
+        if(rec[k] === null || e[k] > rec[k].score){
+          rec[k] = {score:e[k], date:e.date};
+        }
+      });
+    });
+    return rec;
+  }
+
+  function renderRecords(){
+    const rec = getRecords();
+    document.querySelectorAll('.record-card').forEach(card=>{
+      const key = card.dataset.key;
+      const r = rec[key];
+      card.querySelector('.record-score').textContent = r ? fmt(r.score) : '—';
+      card.querySelector('.record-date').textContent = r ? fmtDate(r.date) : 'Chưa có dữ liệu';
+    });
+    document.getElementById('bestOverallSeal').textContent = rec.overall ? fmt(rec.overall.score) : '—';
+    document.getElementById('attemptCount').textContent = entries.length + ' lần thi thử';
+  }
+
+  function renderHistory(){
+    const body = document.getElementById('historyBody');
+    if(entries.length === 0){
+      body.innerHTML = '<tr class="empty-row"><td colspan="8">Chưa có lần thi thử nào được ghi lại.</td></tr>';
+      return;
+    }
+    const rec = getRecords();
+    const sorted = entries.map((e,i)=>({...e, idx:i})).sort((a,b)=> b.date.localeCompare(a.date));
+    body.innerHTML = sorted.map(e=>{
+      const badge = k => (rec[k] && rec[k].score === e[k] && rec[k].date === e.date) ? '<span class="badge-record">KỶ LỤC</span>' : '';
+      return '<tr>'
+        + '<td>'+fmtDate(e.date)+'</td>'
+        + '<td class="record-cell">'+fmt(e.l)+badge('l')+'</td>'
+        + '<td class="record-cell">'+fmt(e.r)+badge('r')+'</td>'
+        + '<td class="record-cell">'+fmt(e.w)+badge('w')+'</td>'
+        + '<td class="record-cell">'+fmt(e.s)+badge('s')+'</td>'
+        + '<td class="overall-cell record-cell">'+fmt(e.overall)+badge('overall')+'</td>'
+        + '<td>'+(e.note || '—')+'</td>'
+        + '<td><button class="del-btn" onclick="deleteEntry('+e.idx+')">✕</button></td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function renderChart(){
+    const container = document.getElementById('chartContainer');
+    if(entries.length === 0){
+      container.innerHTML = '<div class="chart-empty">Chưa có dữ liệu để vẽ biểu đồ — ghi điểm lần thi thử đầu tiên bên dưới.</div>';
+      return;
+    }
+    const sorted = [...entries].sort((a,b)=> a.date.localeCompare(b.date));
+    const W = 800, H = 260, padL = 34, padR = 16, padT = 16, padB = 30;
+    const innerW = W - padL - padR, innerH = H - padT - padB;
+    const n = sorted.length;
+    const xFor = i => padL + (n === 1 ? innerW/2 : (i/(n-1))*innerW);
+    const yFor = v => padT + innerH - (v/9)*innerH;
+
+    let grid = '';
+    for(let g=0; g<=9; g+=3){
+      const y = yFor(g);
+      grid += '<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="rgba(30,42,74,0.10)" stroke-width="1"/>';
+      grid += '<text x="4" y="'+(y+4)+'" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6455">'+g+'</text>';
+    }
+
+    let lines = '';
+    ['l','r','w','s','overall'].forEach(k=>{
+      const pts = sorted.map((e,i)=> xFor(i)+','+yFor(e[k])).join(' ');
+      const color = skillMeta[k].color;
+      const strokeW = k === 'overall' ? 3 : 2;
+      lines += '<polyline points="'+pts+'" fill="none" stroke="'+color+'" stroke-width="'+strokeW+'" stroke-linejoin="round" stroke-linecap="round"/>';
+      sorted.forEach((e,i)=>{
+        lines += '<circle cx="'+xFor(i)+'" cy="'+yFor(e[k])+'" r="'+(k==='overall'?4:3)+'" fill="'+color+'"/>';
+      });
+    });
+
+    let xLabels = '';
+    sorted.forEach((e,i)=>{
+      if(n <= 8 || i % Math.ceil(n/8) === 0 || i === n-1){
+        xLabels += '<text x="'+xFor(i)+'" y="'+(H-8)+'" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6455" text-anchor="middle">'+fmtDate(e.date).slice(0,5)+'</text>';
+      }
+    });
+
+    container.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%; height:auto; display:block;">'+grid+lines+xLabels+'</svg>';
+  }
+
+  function renderAll(){
+    renderRecords();
+    renderHistory();
+    renderChart();
+  }
+
+  function save(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    }catch(e){
+      console.warn('Không lưu được (có thể do đang xem trong khung xem trước, sẽ hoạt động bình thường khi mở file thật):', e);
+    }
+  }
+
+  function load(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) entries = JSON.parse(raw);
+    }catch(e){
+      console.warn('Không đọc được dữ liệu đã lưu:', e);
+    }
+  }
+
+  function resetAll(){
+    if(confirm('Xoá toàn bộ biên bản điểm thi thử? Không thể hoàn tác.')){
+      entries = [];
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      renderAll();
+    }
+  }
+
+  load();
+  renderAll();
+</script>
+</body>
+</html>

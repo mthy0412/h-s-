@@ -255,6 +255,49 @@
   }
   .stamp.show{opacity:0.85; transform:rotate(-8deg) scale(1);}
 
+  .docket-item.locked{
+    opacity:0.5;
+    background:var(--paper-2);
+    pointer-events:none;
+    transform:translateY(0);
+  }
+  .docket-item.locked .docket-check{
+    border-color:var(--text-muted);
+    color:var(--text-muted);
+    font-size:13px;
+  }
+  .docket-item.locked .docket-title{color:var(--text-muted);}
+  .docket-item.locked .docket-meta{font-style:italic;}
+  .docket-item.just-unlocked{
+    animation:unlockPulse 0.6s ease-out;
+  }
+  @keyframes unlockPulse{
+    0%{opacity:0.5; transform:scale(0.97);}
+    50%{opacity:1; transform:scale(1.01);}
+    100%{opacity:1; transform:scale(1);}
+  }
+
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--navy);
+    color:#F0D989;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:12px 20px;
+    border-radius:8px;
+    box-shadow:0 8px 24px rgba(30,42,74,0.35);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.3s, transform 0.3s;
+    z-index:50;
+    max-width:90vw;
+    text-align:center;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
   /* ---------- ROLL CALL (DAILY HABIT) ---------- */
   .rollcall{
     background:var(--card);
@@ -292,6 +335,18 @@
     border-radius:4px;
     font-family:'JetBrains Mono', monospace;
   }
+  .reset-btn{
+    margin-top:14px;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--text-muted);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+  }
+  .reset-btn:hover{border-color:var(--crimson); color:var(--crimson);}
 </style>
 </head>
 <body>
@@ -400,37 +455,142 @@
     <p class="section-desc">Nhiệm vụ dài hạn, mỗi vụ có một hồ sơ số riêng. Nhấn vào ô vuông để đóng dấu hoàn thành.</p>
 
     <div class="docket-list" id="docketList">
-      <div class="docket-item" data-stat="triTue" data-xp="50">
+
+      <!-- ===== CHUỖI IELTS ===== -->
+      <div class="docket-item" data-id="ielts1" data-stat="triTue" data-xp="30">
         <div class="docket-check" onclick="toggleQuest(this)">✓</div>
         <div class="docket-body">
-          <div class="docket-code">HỒ SƠ SỐ 001</div>
+          <div class="docket-code">HỒ SƠ SỐ 001-A</div>
           <div class="docket-title">Đăng ký lịch thi IELTS</div>
-          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +50</span>Mục tiêu 6.5–7.0, trong 3–4 tháng tới</div>
+          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +30</span>Chốt ngày thi trong 3–4 tháng tới</div>
         </div>
         <div class="stamp">ĐÃ HOÀN THÀNH</div>
       </div>
 
-      <div class="docket-item" data-stat="taiChinh" data-xp="40">
+      <div class="docket-item locked" data-id="ielts2" data-requires="ielts1" data-stat="triTue" data-xp="30">
         <div class="docket-check" onclick="toggleQuest(this)">✓</div>
         <div class="docket-body">
-          <div class="docket-code">HỒ SƠ SỐ 002</div>
+          <div class="docket-code">HỒ SƠ SỐ 001-B</div>
+          <div class="docket-title">Làm 1 bài thi thử đầy đủ</div>
+          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +30</span>Xác định chính xác band hiện tại của cả 4 kỹ năng</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item locked" data-id="ielts3" data-requires="ielts2" data-stat="triTue" data-xp="40">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 001-C</div>
+          <div class="docket-title">Viết 4 bài Writing Task 2, có người chữa</div>
+          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +40</span>Writing là kỹ năng khó lên điểm nhất — cần feedback thật</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item locked" data-id="ielts3b" data-requires="ielts3" data-stat="triTue" data-xp="35">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 001-C2</div>
+          <div class="docket-title">Đạt 7.0 mọi dạng Writing Task 1</div>
+          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +35</span>Luyện đủ: biểu đồ đường, cột, tròn, bảng số liệu, sơ đồ quy trình — mỗi dạng ít nhất 1 bài được chữa</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item locked" data-id="ielts4" data-requires="ielts3b" data-stat="triTue" data-xp="50">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 001-D</div>
+          <div class="docket-title">Đạt 7.0 ở bài thi thử gần nhất</div>
+          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +50</span>Không kỹ năng nào dưới 6.5</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item locked" data-id="ielts5" data-requires="ielts4" data-stat="triTue" data-xp="80">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 001-E · CHUNG KẾT</div>
+          <div class="docket-title">Thi IELTS thật</div>
+          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +80</span>Mục tiêu: 7.0 trở lên</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <!-- ===== CHUỖI DẠY KÈM ===== -->
+      <div class="docket-item" data-id="tutor1" data-stat="taiChinh" data-xp="40">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 002-A</div>
           <div class="docket-title">Nhận học viên gia sư đầu tiên</div>
-          <div class="docket-meta"><span class="docket-tag">TÀI CHÍNH +40</span>Bắt đầu với 1–2 học viên, không chờ chứng chỉ</div>
+          <div class="docket-meta"><span class="docket-tag">TÀI CHÍNH +40</span>Bắt đầu ngay, không chờ có chứng chỉ</div>
         </div>
         <div class="stamp">ĐÃ HOÀN THÀNH</div>
       </div>
 
-      <div class="docket-item" data-stat="ketNoi" data-xp="20">
+      <div class="docket-item locked" data-id="tutor2" data-requires="tutor1" data-stat="taiChinh" data-xp="30">
         <div class="docket-check" onclick="toggleQuest(this)">✓</div>
         <div class="docket-body">
-          <div class="docket-code">HỒ SƠ SỐ 003</div>
+          <div class="docket-code">HỒ SƠ SỐ 002-B</div>
+          <div class="docket-title">Dạy đủ 4 buổi cho học viên đầu tiên</div>
+          <div class="docket-meta"><span class="docket-tag">TÀI CHÍNH +30</span>Xin feedback thật từ học viên sau buổi 4</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item locked" data-id="tutor3" data-requires="tutor2" data-stat="taiChinh" data-xp="35">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 002-C</div>
+          <div class="docket-title">Nhận thêm học viên thứ hai</div>
+          <div class="docket-meta"><span class="docket-tag">TÀI CHÍNH +35</span>Dựa trên kinh nghiệm và feedback từ học viên đầu</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <!-- ===== CHUỖI KẾT NỐI ===== -->
+      <div class="docket-item" data-id="net1" data-stat="ketNoi" data-xp="20">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 003-A</div>
           <div class="docket-title">Trò chuyện với một người bạn ngưỡng mộ</div>
           <div class="docket-meta"><span class="docket-tag">KẾT NỐI +20</span>Xin một lời khuyên nghề nghiệp cụ thể</div>
         </div>
         <div class="stamp">ĐÃ HOÀN THÀNH</div>
       </div>
 
-      <div class="docket-item" data-stat="triTue" data-xp="15">
+      <div class="docket-item locked" data-id="net2" data-requires="net1" data-stat="ketNoi" data-xp="15">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 003-B</div>
+          <div class="docket-title">Nhắn hỏi thăm lại sau 1 tháng</div>
+          <div class="docket-meta"><span class="docket-tag">KẾT NỐI +15</span>Duy trì quan hệ, không chỉ hỏi khi cần</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item locked" data-id="net3" data-requires="net2" data-stat="ketNoi" data-xp="25">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 003-C · GIAO LƯU QUỐC TẾ</div>
+          <div class="docket-title">Tham gia 1 sự kiện/cộng đồng giao lưu quốc tế</div>
+          <div class="docket-meta"><span class="docket-tag">KẾT NỐI +25</span>Offline hoặc online đều được — hội thảo du học, group Facebook du học sinh, buổi exchange...</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item locked" data-id="net4" data-requires="net3" data-stat="ketNoi" data-xp="30">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 003-D · GIAO LƯU QUỐC TẾ</div>
+          <div class="docket-title">Kết nối với 1 du học sinh từng học ở châu Âu</div>
+          <div class="docket-meta"><span class="docket-tag">KẾT NỐI +30</span>Ưu tiên người từng học ở Séc — hỏi kinh nghiệm thật về hồ sơ, cuộc sống, học phí</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <!-- ===== HỒ SƠ ĐỊNH KỲ ===== -->
+      <div class="docket-item" data-id="embassy" data-stat="triTue" data-xp="15">
         <div class="docket-check" onclick="toggleQuest(this)">✓</div>
         <div class="docket-body">
           <div class="docket-code">HỒ SƠ SỐ 004 · ĐỊNH KỲ</div>
@@ -465,8 +625,9 @@
   </section>
 
   <footer>
-    Đây là bản demo tĩnh — điểm số hiện lưu tạm trong phiên xem, chưa lưu vĩnh viễn.<br>
-    Khi lên GitHub Pages thật, có thể nối thêm <code>Supabase</code> hoặc GitHub API để lưu hồ sơ lâu dài.
+    Tiến độ được tự động lưu trên trình duyệt này (localStorage) — mở lại trang vẫn còn nguyên.<br>
+    Muốn xem được từ nhiều thiết bị thì cần nối thêm database thật như <code>Supabase</code>.<br>
+    <button class="reset-btn" onclick="resetProgress()">🗑️ Xoá toàn bộ tiến độ đã lưu</button>
   </footer>
 
 </div>
@@ -474,6 +635,7 @@
 <script>
   const stats = { triTue:0, taiChinh:0, kyLuat:0, ketNoi:0 };
   const XP_PER_LEVEL = 200;
+  const STORAGE_KEY = 'lifeRPG_v1';
 
   function totalXP(){
     return Object.values(stats).reduce((a,b)=>a+b,0);
@@ -495,6 +657,8 @@
 
   function toggleQuest(el){
     const item = el.closest('.docket-item');
+    if(item.classList.contains('locked')) return;
+
     const key = item.dataset.stat;
     const xp = parseInt(item.dataset.xp, 10);
     const stamp = item.querySelector('.stamp');
@@ -507,6 +671,7 @@
       title.classList.add('done');
       stamp.classList.add('show');
       stats[key] += xp;
+      unlockDependents(item.dataset.id);
     } else {
       el.classList.remove('checked');
       item.classList.remove('done');
@@ -515,6 +680,35 @@
       stats[key] -= xp;
     }
     renderStats();
+    saveState();
+  }
+
+  function unlockDependents(completedId, silent){
+    if(!completedId) return;
+    document.querySelectorAll('[data-requires="'+completedId+'"]').forEach(dep=>{
+      if(dep.classList.contains('locked')){
+        dep.classList.remove('locked');
+        dep.classList.add('just-unlocked');
+        if(!silent){
+          const depTitle = dep.querySelector('.docket-title').textContent;
+          showToast('🔓 Hồ sơ mới đã mở: ' + depTitle);
+        }
+      }
+    });
+  }
+
+  function showToast(msg){
+    let toast = document.getElementById('toast');
+    if(!toast){
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      toast.className = 'toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(()=>toast.classList.remove('show'), 3200);
   }
 
   function toggleDay(el){
@@ -529,14 +723,83 @@
       stats[key] -= xp;
     }
     renderStats();
+    saveState();
   }
 
   const nameInput = document.getElementById('fldName');
+  const ageInput = document.getElementById('fldAge');
   const sealName = document.getElementById('sealName');
+  const subjectLine = document.querySelector('.subject-line');
+
   nameInput.addEventListener('input', ()=>{
     sealName.textContent = nameInput.value.trim();
+    saveState();
   });
+  ageInput.addEventListener('input', saveState);
+  subjectLine.addEventListener('input', saveState);
 
+  function saveState(){
+    try{
+      const completed = Array.from(document.querySelectorAll('.docket-check.checked'))
+        .map(el => el.closest('.docket-item').dataset.id);
+      const habitDays = Array.from(document.querySelectorAll('.day-box.on')).map(el => el.textContent);
+      const state = {
+        name: nameInput.value,
+        age: ageInput.value,
+        subjectHTML: subjectLine.innerHTML,
+        completed,
+        habitDays
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }catch(e){
+      console.warn('Không lưu được tiến độ (có thể do đang xem trong khung xem trước, sẽ hoạt động bình thường khi mở file thật):', e);
+    }
+  }
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      const state = JSON.parse(raw);
+
+      if(state.name){ nameInput.value = state.name; sealName.textContent = state.name; }
+      if(state.age) ageInput.value = state.age;
+      if(state.subjectHTML) subjectLine.innerHTML = state.subjectHTML;
+
+      (state.completed || []).forEach(id=>{
+        const item = document.querySelector('.docket-item[data-id="'+id+'"]');
+        if(!item) return;
+        unlockDependents(id, true);
+        item.classList.remove('locked');
+        item.classList.add('done');
+        item.querySelector('.docket-check').classList.add('checked');
+        item.querySelector('.docket-title').classList.add('done');
+        item.querySelector('.stamp').classList.add('show');
+        stats[item.dataset.stat] += parseInt(item.dataset.xp, 10);
+      });
+
+      (state.habitDays || []).forEach(label=>{
+        document.querySelectorAll('.day-box').forEach(db=>{
+          if(db.textContent === label && !db.classList.contains('on')){
+            db.classList.add('on');
+            const group = db.closest('.days');
+            stats[group.dataset.stat] += parseInt(group.dataset.xp, 10);
+          }
+        });
+      });
+    }catch(e){
+      console.warn('Không đọc được dữ liệu đã lưu:', e);
+    }
+  }
+
+  function resetProgress(){
+    if(confirm('Xoá toàn bộ tiến độ đã lưu? Không thể hoàn tác.')){
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    }
+  }
+
+  loadState();
   renderStats();
 </script>
 </body>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HỒ SƠ NHÂN VẬT — Life RPG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --paper-2:#F1EBD9;
+    --card:#FFFFFF;
+    --navy:#1E2A4A;
+    --navy-soft:#3C4A72;
+    --gold:#B8860B;
+    --gold-soft:#8A6400;
+    --gold-fill:#D9A93C;
+    --crimson:#A13D3D;
+    --sage:#3F7A54;
+    --text-ink:#232323;
+    --text-muted:#6B6455;
+    --line:rgba(30,42,74,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 15% -10%, rgba(184,134,11,0.08), transparent 45%),
+      radial-gradient(ellipse at 100% 0%, rgba(30,42,74,0.06), transparent 40%),
+      var(--paper);
+    color:var(--text-ink);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+  .wrap{max-width:880px; margin:0 auto;}
+
+  /* ---------- HEADER : FOLDER TAB ---------- */
+  .folder-tab{display:flex; align-items:center; gap:10px; margin-bottom:2px;}
+  .tab{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-bottom:none;
+    padding:8px 18px 12px;
+    border-radius:8px 8px 0 0;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--navy-soft);
+  }
+  .tab.active{
+    background:var(--card);
+    color:var(--navy);
+    font-weight:700;
+  }
+
+  header.dossier{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:0 10px 10px 10px;
+    padding:28px 28px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+    box-shadow:0 4px 20px rgba(30,42,74,0.06);
+  }
+  .dossier-title-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    color:var(--text-muted);
+    margin-bottom:8px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:clamp(28px,4vw,38px);
+    color:var(--navy);
+    line-height:1.1;
+  }
+  .subject-line{margin-top:10px; font-size:14px; color:var(--text-muted); outline:none; border-radius:4px; padding:2px 4px; margin-left:-4px;}
+  .subject-line b{color:var(--gold-soft); font-weight:600;}
+  .subject-line:focus{background:var(--paper-2);}
+  .edit-hint{font-size:10.5px; color:var(--text-muted); opacity:0.7; margin-top:4px; font-style:italic;}
+
+  .fields-row{display:flex; gap:22px; margin-top:14px; flex-wrap:wrap;}
+  .field{display:flex; flex-direction:column; gap:3px;}
+  .field-narrow{width:70px;}
+  .field label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:0.1em;
+    color:var(--text-muted);
+  }
+  .field input{
+    font-family:'Fraunces', serif;
+    font-size:16px;
+    font-weight:600;
+    color:var(--navy);
+    background:transparent;
+    border:none;
+    border-bottom:1.5px dashed rgba(184,134,11,0.5);
+    padding:2px 2px 4px;
+    min-width:160px;
+    outline:none;
+  }
+  .field-narrow input{min-width:50px;}
+  .field input::placeholder{color:#B9B2A0; font-weight:400;}
+  .field input:focus{border-bottom-style:solid; border-bottom-color:var(--gold);}
+
+  /* Wax seal / level badge */
+  .seal{
+    width:104px; height:104px;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, var(--gold-fill), var(--gold) 60%, #8a6400 100%);
+    border:3px solid #7a5f16;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#2A1F05;
+    flex-shrink:0;
+    position:relative;
+    box-shadow: 0 6px 18px rgba(184,134,11,0.25);
+    transform:rotate(-4deg);
+  }
+  .seal .level-label{font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em;}
+  .seal .level-num{font-family:'Fraunces',serif; font-weight:700; font-size:30px; line-height:1;}
+  .seal .level-rank{font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.05em; text-align:center; margin-top:2px; padding:0 8px;}
+
+  .xp-total{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-muted);
+    text-align:center;
+    margin-top:8px;
+  }
+  .xp-total b{color:var(--gold-soft);}
+  .seal-name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--navy-soft);
+    margin-top:6px;
+    max-width:110px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{margin-top:36px;}
+  .section-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    color:var(--gold-soft);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .section-eyebrow::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, rgba(184,134,11,0.4), transparent);
+  }
+  h2.section-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    color:var(--navy);
+    margin-bottom:4px;
+  }
+  .section-desc{font-size:13px; color:var(--text-muted); margin-bottom:18px; max-width:60ch;}
+
+  /* ---------- EXHIBITS (STATS) ---------- */
+  .exhibits{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media(max-width:600px){.exhibits{grid-template-columns:1fr;}}
+  .exhibit{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    border-radius:6px;
+    padding:16px 18px;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  .exhibit-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
+  .exhibit-letter{font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.1em; color:var(--text-muted);}
+  .exhibit-name{font-family:'Fraunces', serif; font-weight:600; font-size:16px; color:var(--navy);}
+  .exhibit-value{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--gold-soft);}
+  .bar-track{height:8px; background:var(--paper-2); border-radius:4px; overflow:hidden;}
+  .bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--gold), var(--gold-fill));
+    border-radius:4px;
+    transition:width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  .exhibit-note{font-size:11.5px; color:var(--text-muted); margin-top:8px; line-height:1.4;}
+
+  /* ---------- DOCKET (MAIN QUESTS) ---------- */
+  .docket-list{display:flex; flex-direction:column; gap:10px;}
+  .docket-item{
+    background:var(--card);
+    color:var(--text-ink);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:14px 16px;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  .docket-item.done{background:var(--paper-2);}
+  .docket-check{
+    width:24px; height:24px;
+    border:2px solid var(--navy);
+    border-radius:4px;
+    flex-shrink:0;
+    margin-top:2px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    background:transparent;
+    transition:background 0.2s;
+    color:transparent;
+  }
+  .docket-check.checked{background:var(--sage); border-color:var(--sage); color:white; font-size:15px;}
+  .docket-body{flex:1;}
+  .docket-code{font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.08em; color:var(--text-muted);}
+  .docket-title{font-family:'Fraunces', serif; font-weight:600; font-size:15.5px; margin-top:2px; color:var(--navy);}
+  .docket-title.done{text-decoration:line-through; opacity:0.55;}
+  .docket-meta{font-size:11.5px; color:var(--text-muted); margin-top:4px;}
+  .docket-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:0.05em;
+    background:var(--navy);
+    color:#F0D989;
+    padding:2px 7px;
+    border-radius:3px;
+    margin-right:6px;
+  }
+  .stamp{
+    position:absolute;
+    right:14px; top:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--crimson);
+    border:2px solid var(--crimson);
+    border-radius:4px;
+    padding:3px 8px;
+    transform:rotate(-8deg);
+    opacity:0;
+    transition:opacity 0.3s, transform 0.3s;
+  }
+  .stamp.show{opacity:0.85; transform:rotate(-8deg) scale(1);}
+
+  /* ---------- ROLL CALL (DAILY HABIT) ---------- */
+  .rollcall{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:18px 20px;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  .rollcall-row{display:flex; align-items:center; gap:14px; justify-content:space-between; flex-wrap:wrap;}
+  .rollcall-label{font-family:'Fraunces', serif; font-size:15px; font-weight:600; color:var(--navy);}
+  .days{display:flex; gap:8px;}
+  .day-box{
+    width:34px; height:34px;
+    border-radius:50%;
+    border:2px solid rgba(184,134,11,0.4);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    cursor:pointer;
+    color:var(--text-muted);
+    transition:all 0.2s;
+  }
+  .day-box.on{background:var(--gold); border-color:var(--gold); color:white; font-weight:700;}
+
+  footer{
+    margin-top:48px;
+    font-size:11.5px;
+    color:var(--text-muted);
+    text-align:center;
+    line-height:1.6;
+  }
+  footer code{
+    background:var(--paper-2);
+    padding:2px 6px;
+    border-radius:4px;
+    font-family:'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="folder-tab">
+    <div class="tab active">HỒ SƠ NHÂN VẬT</div>
+    <div class="tab">MỤC</div>
+    <div class="tab">ĐIỂM DANH</div>
+  </div>
+
+  <header class="dossier">
+    <div>
+      <div class="dossier-title-eyebrow">SỐ HỒ SƠ: LRPG-002 · NĂM THỨ HAI</div>
+      <h1>Hồ Sơ Nhân Vật</h1>
+
+      <div class="fields-row">
+        <div class="field">
+          <label for="fldName">ĐƯƠNG SỰ (HỌ VÀ TÊN)</label>
+          <input type="text" id="fldName" placeholder="Nhập tên của bạn...">
+        </div>
+        <div class="field field-narrow">
+          <label for="fldAge">TUỔI</label>
+          <input type="number" id="fldAge" placeholder="—">
+        </div>
+      </div>
+
+      <div class="subject-line" contenteditable="true" spellcheck="false">
+        Chuyên ngành: <b>Tiếng Anh Pháp Lý</b> · Đại học Luật TP.HCM<br>
+        Mục tiêu đang mở: <b>IELTS</b> · <b>Học bổng Séc (hệ tiếng Anh)</b> · <b>Dạy kèm</b>
+      </div>
+      <div class="edit-hint">✎ Nhấn vào dòng trên để chỉnh sửa trực tiếp</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="seal">
+        <div class="level-label">CẤP ĐỘ</div>
+        <div class="level-num" id="levelNum">2</div>
+        <div class="level-rank">HỌC VIÊN<br>TẬP SỰ</div>
+      </div>
+      <div class="xp-total"><b id="xpTotal">0</b> / <span id="xpNeeded">200</span> XP</div>
+      <div class="seal-name" id="sealName"></div>
+    </div>
+  </header>
+
+  <!-- ============ EXHIBITS / STATS ============ -->
+  <section>
+    <div class="section-eyebrow">MỤC A–D</div>
+    <h2 class="section-title">Các Chỉ Số Năng Lực</h2>
+    <p class="section-desc">Bốn chỉ số phản ánh đúng 4 mặt trận bạn đang theo đuổi cùng lúc. Hoàn thành hồ sơ bên dưới để cộng điểm tương ứng.</p>
+
+    <div class="exhibits" id="exhibits">
+      <div class="exhibit" data-stat="triTue">
+        <div class="exhibit-head">
+          <div>
+            <div class="exhibit-letter">MỤC A</div>
+            <div class="exhibit-name">Trí Tuệ</div>
+          </div>
+          <div class="exhibit-value"><span class="val">0</span>/100</div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+        <div class="exhibit-note">Tiếng Anh, IELTS, kiến thức pháp lý — nền tảng học thuật.</div>
+      </div>
+
+      <div class="exhibit" data-stat="taiChinh">
+        <div class="exhibit-head">
+          <div>
+            <div class="exhibit-letter">MỤC B</div>
+            <div class="exhibit-name">Tài Chính</div>
+          </div>
+          <div class="exhibit-value"><span class="val">0</span>/100</div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+        <div class="exhibit-note">Dạy kèm, freelance, mọi bước tự tạo thu nhập.</div>
+      </div>
+
+      <div class="exhibit" data-stat="kyLuat">
+        <div class="exhibit-head">
+          <div>
+            <div class="exhibit-letter">MỤC C</div>
+            <div class="exhibit-name">Kỷ Luật</div>
+          </div>
+          <div class="exhibit-value"><span class="val">0</span>/100</div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+        <div class="exhibit-note">Thói quen hằng ngày — nền để mọi mục tiêu khác thành thật.</div>
+      </div>
+
+      <div class="exhibit" data-stat="ketNoi">
+        <div class="exhibit-head">
+          <div>
+            <div class="exhibit-letter">MỤC D</div>
+            <div class="exhibit-name">Kết Nối</div>
+          </div>
+          <div class="exhibit-value"><span class="val">0</span>/100</div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+        <div class="exhibit-note">Mạng lưới quan hệ — tận dụng việc bạn dễ được tin tưởng.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAIN QUESTS / DOCKET ============ -->
+  <section>
+    <div class="section-eyebrow">DANH SÁCH VỤ VIỆC</div>
+    <h2 class="section-title">Hồ Sơ Đang Xử Lý</h2>
+    <p class="section-desc">Nhiệm vụ dài hạn, mỗi vụ có một hồ sơ số riêng. Nhấn vào ô vuông để đóng dấu hoàn thành.</p>
+
+    <div class="docket-list" id="docketList">
+      <div class="docket-item" data-stat="triTue" data-xp="50">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 001</div>
+          <div class="docket-title">Đăng ký lịch thi IELTS</div>
+          <div class="docket-meta"><span class="docket-tag">TRÍ TUỆ +50</span>Mục tiêu 6.5–7.0, trong 3–4 tháng tới</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item" data-stat="taiChinh" data-xp="40">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 002</div>
+          <div class="docket-title">Nhận học viên gia sư đầu tiên</div>
+          <div class="docket-meta"><span class="docket-tag">TÀI CHÍNH +40</span>Bắt đầu với 1–2 học viên, không chờ chứng chỉ</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item" data-stat="ketNoi" data-xp="20">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 003</div>
+          <div class="docket-title">Trò chuyện với một người bạn ngưỡng mộ</div>
+          <div class="docket-meta"><span class="docket-tag">KẾT NỐI +20</span>Xin một lời khuyên nghề nghiệp cụ thể</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+
+      <div class="docket-item" data-stat="triTue" data-xp="15">
+        <div class="docket-check" onclick="toggleQuest(this)">✓</div>
+        <div class="docket-body">
+          <div class="docket-code">HỒ SƠ SỐ 004 · ĐỊNH KỲ</div>
+          <div class="docket-title">Kiểm tra tiến độ hồ sơ đại sứ quán</div>
+          <div class="docket-meta"><span class="docket-tag">1 LẦN/THÁNG</span>Kiểm tra rồi gấp hồ sơ lại — không nghĩ đến giữa chừng</div>
+        </div>
+        <div class="stamp">ĐÃ HOÀN THÀNH</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DAILY ROLL CALL ============ -->
+  <section>
+    <div class="section-eyebrow">ĐIỂM DANH TUẦN</div>
+    <h2 class="section-title">Thói Quen Hằng Ngày</h2>
+    <p class="section-desc">Chọn 1 thói quen nhỏ để bắt đầu — ví dụ 15 phút vận động. Đánh dấu từng ngày duy trì được.</p>
+
+    <div class="rollcall">
+      <div class="rollcall-row">
+        <div class="rollcall-label">🏃 Vận động 15 phút</div>
+        <div class="days" data-stat="kyLuat" data-xp="8">
+          <div class="day-box" onclick="toggleDay(this)">T2</div>
+          <div class="day-box" onclick="toggleDay(this)">T3</div>
+          <div class="day-box" onclick="toggleDay(this)">T4</div>
+          <div class="day-box" onclick="toggleDay(this)">T5</div>
+          <div class="day-box" onclick="toggleDay(this)">T6</div>
+          <div class="day-box" onclick="toggleDay(this)">T7</div>
+          <div class="day-box" onclick="toggleDay(this)">CN</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Đây là bản demo tĩnh — điểm số hiện lưu tạm trong phiên xem, chưa lưu vĩnh viễn.<br>
+    Khi lên GitHub Pages thật, có thể nối thêm <code>Supabase</code> hoặc GitHub API để lưu hồ sơ lâu dài.
+  </footer>
+
+</div>
+
+<script>
+  const stats = { triTue:0, taiChinh:0, kyLuat:0, ketNoi:0 };
+  const XP_PER_LEVEL = 200;
+
+  function totalXP(){
+    return Object.values(stats).reduce((a,b)=>a+b,0);
+  }
+
+  function renderStats(){
+    document.querySelectorAll('.exhibit').forEach(ex=>{
+      const key = ex.dataset.stat;
+      const val = Math.min(stats[key],100);
+      ex.querySelector('.bar-fill').style.width = val + '%';
+      ex.querySelector('.val').textContent = val;
+    });
+    const xp = totalXP();
+    const level = Math.floor(xp / XP_PER_LEVEL) + 2;
+    document.getElementById('levelNum').textContent = level;
+    document.getElementById('xpTotal').textContent = xp;
+    document.getElementById('xpNeeded').textContent = (Math.floor(xp/XP_PER_LEVEL)+1)*XP_PER_LEVEL;
+  }
+
+  function toggleQuest(el){
+    const item = el.closest('.docket-item');
+    const key = item.dataset.stat;
+    const xp = parseInt(item.dataset.xp, 10);
+    const stamp = item.querySelector('.stamp');
+    const title = item.querySelector('.docket-title');
+    const isDone = el.classList.contains('checked');
+
+    if(!isDone){
+      el.classList.add('checked');
+      item.classList.add('done');
+      title.classList.add('done');
+      stamp.classList.add('show');
+      stats[key] += xp;
+    } else {
+      el.classList.remove('checked');
+      item.classList.remove('done');
+      title.classList.remove('done');
+      stamp.classList.remove('show');
+      stats[key] -= xp;
+    }
+    renderStats();
+  }
+
+  function toggleDay(el){
+    const group = el.closest('.days');
+    const key = group.dataset.stat;
+    const xp = parseInt(group.dataset.xp, 10);
+    if(!el.classList.contains('on')){
+      el.classList.add('on');
+      stats[key] += xp;
+    } else {
+      el.classList.remove('on');
+      stats[key] -= xp;
+    }
+    renderStats();
+  }
+
+  const nameInput = document.getElementById('fldName');
+  const sealName = document.getElementById('sealName');
+  nameInput.addEventListener('input', ()=>{
+    sealName.textContent = nameInput.value.trim();
+  });
+
+  renderStats();
+</script>
+</body>
+</html>

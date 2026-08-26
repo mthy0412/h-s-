@@ -147,6 +147,27 @@
   .legend i{width:10px; height:10px; border-radius:50%; display:inline-block;}
   .chart-empty{font-size:13px; color:var(--text-muted); text-align:center; padding:30px 0;}
 
+  /* ---------- PART TABS (per-skill history) ---------- */
+  .part-tabs{display:flex; gap:8px; flex-wrap:wrap;}
+  .part-tab{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    color:var(--navy-soft);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    padding:8px 16px;
+    border-radius:6px;
+    cursor:pointer;
+  }
+  .part-tab:hover{border-color:var(--gold);}
+  .part-tab.active{background:var(--navy); color:#F0D989; border-color:var(--navy); font-weight:700;}
+  .part-best{
+    display:flex; align-items:center; gap:10px; margin-top:14px;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--text-muted);
+  }
+  .part-best b{font-family:'Fraunces', serif; font-size:16px; color:var(--gold-soft);}
+
   /* ---------- FORM ---------- */
   .form-card{
     background:var(--card);
@@ -323,6 +344,33 @@
     </div>
   </section>
 
+  <!-- ============ PART-BY-PART HISTORY (NEW) ============ -->
+  <section>
+    <div class="section-eyebrow">CHI TIẾT TỪNG KỸ NĂNG</div>
+    <h2 class="section-title">Lịch Sử Theo Từng Kỹ Năng</h2>
+    <p class="section-desc">Chọn một kỹ năng để xem riêng biểu đồ và bảng điểm của kỹ năng đó qua các lần thi thử.</p>
+    <div class="part-tabs" id="partTabs">
+      <button class="part-tab active" data-skill="l">Listening</button>
+      <button class="part-tab" data-skill="r">Reading</button>
+      <button class="part-tab" data-skill="w">Writing</button>
+      <button class="part-tab" data-skill="s">Speaking</button>
+    </div>
+    <div class="chart-card" style="margin-top:14px;">
+      <div id="partChartContainer"><div class="chart-empty">Chưa có dữ liệu để vẽ biểu đồ.</div></div>
+      <div class="part-best" id="partBest"></div>
+    </div>
+    <div class="history-card" style="margin-top:14px;">
+      <table>
+        <thead>
+          <tr><th>Ngày</th><th id="partScoreHeader">Listening</th><th>Ghi chú</th></tr>
+        </thead>
+        <tbody id="partHistoryBody">
+          <tr class="empty-row"><td colspan="3">Chưa có dữ liệu.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- ============ ADD ENTRY FORM ============ -->
   <section>
     <div class="section-eyebrow">GHI NHẬN MỚI</div>
@@ -397,6 +445,7 @@
 <script>
   const STORAGE_KEY = 'ieltsTracker_v1';
   let entries = [];
+  let activePart = 'l'; // kỹ năng đang được chọn ở mục "Lịch Sử Theo Từng Kỹ Năng"
 
   const skillMeta = {
     l:{name:'Listening', color:'var(--sky)'},
@@ -566,10 +615,94 @@
     container.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%; height:auto; display:block;">'+grid+lines+xLabels+'</svg>';
   }
 
+  // ---------- PART-BY-PART HISTORY (NEW) ----------
+
+  function renderPartChart(skill){
+    const container = document.getElementById('partChartContainer');
+    if(entries.length === 0){
+      container.innerHTML = '<div class="chart-empty">Chưa có dữ liệu để vẽ biểu đồ.</div>';
+      return;
+    }
+    const sorted = [...entries].sort((a,b)=> a.date.localeCompare(b.date));
+    const W = 800, H = 220, padL = 34, padR = 16, padT = 16, padB = 30;
+    const innerW = W - padL - padR, innerH = H - padT - padB;
+    const n = sorted.length;
+    const xFor = i => padL + (n === 1 ? innerW/2 : (i/(n-1))*innerW);
+    const yFor = v => padT + innerH - (v/9)*innerH;
+
+    let grid = '';
+    for(let g=0; g<=9; g+=3){
+      const y = yFor(g);
+      grid += '<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="rgba(30,42,74,0.10)" stroke-width="1"/>';
+      grid += '<text x="4" y="'+(y+4)+'" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6455">'+g+'</text>';
+    }
+
+    const color = skillMeta[skill].color;
+    const pts = sorted.map((e,i)=> xFor(i)+','+yFor(e[skill])).join(' ');
+    let line = '<polyline points="'+pts+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    sorted.forEach((e,i)=>{
+      line += '<circle cx="'+xFor(i)+'" cy="'+yFor(e[skill])+'" r="3.5" fill="'+color+'"/>';
+    });
+
+    let xLabels = '';
+    sorted.forEach((e,i)=>{
+      if(n <= 8 || i % Math.ceil(n/8) === 0 || i === n-1){
+        xLabels += '<text x="'+xFor(i)+'" y="'+(H-8)+'" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6455" text-anchor="middle">'+fmtDate(e.date).slice(0,5)+'</text>';
+      }
+    });
+
+    container.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%; height:auto; display:block;">'+grid+line+xLabels+'</svg>';
+  }
+
+  function renderPartHistoryTable(skill){
+    const body = document.getElementById('partHistoryBody');
+    document.getElementById('partScoreHeader').textContent = skillMeta[skill].name;
+
+    if(entries.length === 0){
+      body.innerHTML = '<tr class="empty-row"><td colspan="3">Chưa có dữ liệu.</td></tr>';
+      document.getElementById('partBest').innerHTML = '';
+      return;
+    }
+    const rec = getRecords();
+    const sorted = entries.map((e,i)=>({...e, idx:i})).sort((a,b)=> b.date.localeCompare(a.date));
+    body.innerHTML = sorted.map(e=>{
+      const isRecord = rec[skill] && rec[skill].score === e[skill] && rec[skill].date === e.date;
+      const badge = isRecord ? '<span class="badge-record">KỶ LỤC</span>' : '';
+      return '<tr>'
+        + '<td>'+fmtDate(e.date)+'</td>'
+        + '<td class="record-cell">'+fmt(e[skill])+badge+'</td>'
+        + '<td>'+(e.note || '—')+'</td>'
+        + '</tr>';
+    }).join('');
+
+    const best = rec[skill];
+    document.getElementById('partBest').innerHTML = best
+      ? 'ĐIỂM CAO NHẤT: <b>'+fmt(best.score)+'</b>&nbsp;·&nbsp;đạt ngày '+fmtDate(best.date)
+      : '';
+  }
+
+  function renderPartSection(){
+    document.querySelectorAll('.part-tab').forEach(btn=>{
+      btn.classList.toggle('active', btn.dataset.skill === activePart);
+    });
+    renderPartChart(activePart);
+    renderPartHistoryTable(activePart);
+  }
+
+  document.querySelectorAll('.part-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activePart = btn.dataset.skill;
+      renderPartSection();
+    });
+  });
+
+  // ---------------------------------------------------
+
   function renderAll(){
     renderRecords();
     renderHistory();
     renderChart();
+    renderPartSection();
   }
 
   function save(){

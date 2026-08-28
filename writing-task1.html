@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHÒNG LUYỆN TẬP — WRITING TASK 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --paper-2:#F1EBD9;
+    --card:#FFFFFF;
+    --navy:#1E2A4A;
+    --navy-soft:#3C4A72;
+    --gold:#B8860B;
+    --gold-soft:#8A6400;
+    --gold-fill:#D9A93C;
+    --crimson:#A13D3D;
+    --sage:#3F7A54;
+    --sky:#2E6E8E;
+    --plum:#6B4E8E;
+    --text-ink:#232323;
+    --text-muted:#6B6455;
+    --line:rgba(30,42,74,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 15% -10%, rgba(184,134,11,0.08), transparent 45%),
+      radial-gradient(ellipse at 100% 0%, rgba(30,42,74,0.06), transparent 40%),
+      var(--paper);
+    color:var(--text-ink);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+  .wrap{max-width:900px; margin:0 auto;}
+
+  .folder-tab{display:flex; align-items:center; gap:10px; margin-bottom:2px; flex-wrap:wrap;}
+  .tab{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-bottom:none;
+    padding:8px 18px 12px;
+    border-radius:8px 8px 0 0;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--navy-soft);
+    text-decoration:none;
+    display:inline-block;
+    cursor:pointer;
+  }
+  .tab.active{background:var(--card); color:var(--navy); font-weight:700;}
+
+  header.dossier{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:0 10px 10px 10px;
+    padding:28px 28px 24px;
+    box-shadow:0 4px 20px rgba(30,42,74,0.06);
+  }
+  .dossier-title-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    color:var(--text-muted);
+    margin-bottom:8px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:clamp(26px,4vw,36px);
+    color:var(--navy);
+    line-height:1.1;
+  }
+  .subject-line{margin-top:10px; font-size:14px; color:var(--text-muted); max-width:66ch; line-height:1.55;}
+  .subject-line b{color:var(--gold-soft); font-weight:600;}
+
+  section{margin-top:36px;}
+  .section-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    color:var(--gold-soft);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .section-eyebrow::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, rgba(184,134,11,0.4), transparent);}
+  h2.section-title{font-family:'Fraunces', serif; font-weight:600; font-size:22px; color:var(--navy); margin-bottom:4px;}
+  .section-desc{font-size:13px; color:var(--text-muted); margin-bottom:18px; max-width:64ch;}
+
+  /* ---------- EXERCISE NAV ---------- */
+  .ex-nav{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;}
+  .ex-nav button{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    color:var(--navy-soft);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    padding:8px 16px;
+    border-radius:6px;
+    cursor:pointer;
+  }
+  .ex-nav button:hover{border-color:var(--gold);}
+  .ex-nav button.active{background:var(--navy); color:#F0D989; border-color:var(--navy); font-weight:700;}
+
+  /* ---------- EXERCISE CARD ---------- */
+  .exercise-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    border-radius:6px;
+    padding:22px 24px 26px;
+    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+  }
+  .docket-code{font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:6px;}
+  .ex-title{font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--navy); margin-bottom:12px;}
+  .ex-task{
+    font-size:13.5px; line-height:1.6; color:var(--text-ink);
+    background:var(--paper-2); border-left:3px solid var(--gold); border-radius:0 6px 6px 0;
+    padding:12px 14px; margin-bottom:20px;
+  }
+
+  .chart-box{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:20px; overflow-x:auto;}
+  .chart-box svg{display:block; margin:0 auto;}
+
+  .vocab{margin-bottom:20px;}
+  .vocab-title{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:8px;}
+  .vocab-list{display:flex; flex-wrap:wrap; gap:7px;}
+  .vocab-chip{font-size:12px; background:var(--paper-2); border:1px solid var(--line); border-radius:16px; padding:4px 11px; color:var(--navy-soft); font-family:'JetBrains Mono',monospace;}
+
+  .write-area{margin-bottom:16px;}
+  .write-label{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
+  .write-label span:first-child{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--text-muted);}
+  .word-count{font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--text-muted);}
+  .word-count.ok{color:var(--sage); font-weight:700;}
+  textarea{
+    width:100%; min-height:160px; font-family:'Inter', sans-serif; font-size:14px; line-height:1.6;
+    padding:12px 14px; border:1.5px solid var(--line); border-radius:6px; background:var(--paper); color:var(--text-ink); resize:vertical;
+  }
+  textarea:focus{outline:none; border-color:var(--gold);}
+
+  .reveal-btn{
+    background:var(--navy); color:#F0D989; border:none;
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.05em;
+    padding:11px 20px; border-radius:6px; cursor:pointer; margin-bottom:18px;
+  }
+  .reveal-btn:hover{background:var(--navy-soft);}
+
+  .model-answer{
+    display:none; background:var(--paper-2); border:1px dashed var(--line); border-radius:8px;
+    padding:16px 18px; margin-bottom:20px;
+  }
+  .model-answer.show{display:block;}
+  .model-answer-title{font-family:'Fraunces', serif; font-weight:600; font-size:14px; color:var(--sage); margin-bottom:10px;}
+  .model-answer p{font-size:13.5px; line-height:1.65; margin-bottom:10px; color:var(--text-ink);}
+  .model-answer p:last-child{margin-bottom:0;}
+
+  .checklist{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px 18px;}
+  .checklist-title{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:10px;}
+  .crit-group{margin-bottom:14px;}
+  .crit-group:last-child{margin-bottom:0;}
+  .crit-group h4{font-family:'Fraunces', serif; font-size:13px; font-weight:600; margin-bottom:8px; color:var(--gold-soft);}
+  .crit-item{display:flex; align-items:flex-start; gap:8px; margin-bottom:6px; cursor:pointer;}
+  .crit-item input{margin-top:2px; width:15px; height:15px; accent-color:var(--sage); cursor:pointer; flex-shrink:0;}
+  .crit-item span{font-size:12.5px; line-height:1.4; color:var(--text-ink);}
+  .crit-item.checked span{color:var(--text-muted); text-decoration:line-through; text-decoration-color:var(--sage);}
+  .crit-score{margin-top:12px; padding-top:12px; border-top:1px solid var(--line); font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-muted);}
+  .crit-score b{color:var(--crimson); font-size:15px;}
+
+  footer{margin-top:48px; font-size:11.5px; color:var(--text-muted); text-align:center; line-height:1.6;}
+  footer code{background:var(--paper-2); padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono', monospace;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="folder-tab">
+    <a class="tab" href="index.html">HỒ SƠ NHÂN VẬT</a>
+    <a class="tab" href="ielts-tracker.html">BIÊN BẢN ĐIỂM</a>
+    <a class="tab active" href="writing-task1.html">PHÒNG LUYỆN TẬP</a>
+  </div>
+
+  <header class="dossier">
+    <div class="dossier-title-eyebrow">SỐ HỒ SƠ: LRPG-003 · TASK 1 ACADEMIC WRITING</div>
+    <h1>Phòng Luyện Tập</h1>
+    <div class="subject-line">
+      Nơi luyện bài trước khi nộp vào <b>HỒ SƠ SỐ 001-C2</b>. Viết bài của bạn trước khi xem bài mẫu — thấy khoảng cách thật giữa bài viết hiện tại và band 8 hiệu quả hơn nhiều so với chỉ đọc lý thuyết.
+    </div>
+  </header>
+
+  <!-- ============ EXERCISES ============ -->
+  <section>
+    <div class="section-eyebrow">4 DẠNG BIỂU ĐỒ THƯỜNG GẶP</div>
+    <h2 class="section-title">Luyện Tập &amp; Tự Chấm</h2>
+    <p class="section-desc">Số liệu và bài mẫu là nội dung gốc, biên soạn riêng cho phòng luyện tập này — không sao chép từ bất kỳ sách nào.</p>
+
+    <div class="ex-nav" id="exNav"></div>
+    <div id="exerciseSlot"></div>
+  </section>
+
+  <footer>
+    Tiến độ &amp; bài viết được tự động lưu trên trình duyệt này (localStorage) — mở lại trang vẫn còn nguyên.<br>
+    Dữ liệu chỉ lưu trên máy này, không đồng bộ giữa các thiết bị.
+  </footer>
+
+</div>
+
+<script>
+  const STORAGE_KEY = 'lifeRPG_writing_v1';
+
+  // ---------- Original exercise data (composed for this practice room) ----------
+  const EXERCISES = [
+    {
+      id:'line', code:'HỒ SƠ LUYỆN TẬP SỐ T1-01', tag:'Line graph', title:'Social media use by age group',
+      task:'The line graph below shows the percentage of people in four age groups who used social media in a country between 2000 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
+      vocab:['rise steadily','climb sharply','a fourfold increase','remain comparatively low','overtake','plateau','a gradual upward trend','far outstrip'],
+      chart:{years:[2000,2005,2010,2015,2020],
+        series:[
+          {label:'16–24', color:'#A13D3D', data:[5,20,55,85,90]},
+          {label:'25–44', color:'#B8860B', data:[2,10,35,65,78]},
+          {label:'45–64', color:'#3F7A54', data:[1,4,15,35,52]},
+          {label:'65+',   color:'#1E2A4A', data:[0,1,4,12,25]},
+        ]},
+      model:[
+        "The line graph illustrates the proportion of four age groups in a given country who used social media between 2000 and 2020.",
+        "Overall, social media use rose sharply across all age groups over the period, although younger people consistently made up the largest share of users, while uptake among the elderly remained comparatively low throughout.",
+        "In 2000, social media was used by only a small minority, with just 5% of 16–24 year olds and negligible proportions of older groups engaging with it. From this point, usage climbed steadily in every category, though the pace of growth varied considerably. The 16–24 age group saw the fastest rise, reaching 55% by 2010 and eventually peaking at 90% in 2020.",
+        "The three older groups followed a broadly similar upward trajectory but at progressively lower levels. By 2020, 78% of 25–44 year olds and just over half of 45–64 year olds were using social media, whereas the 65-and-over group, despite a fourfold increase since 2010, still lagged furthest behind at only 25%."
+      ]
+    },
+    {
+      id:'bar', code:'HỒ SƠ LUYỆN TẬP SỐ T1-02', tag:'Bar chart', title:'Weekly leisure time by gender',
+      task:'The bar chart below shows the average number of hours per week that men and women spent on five leisure activities in a European country in 2022. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
+      vocab:['nearly double','marginally higher','a notable gap','considerably more time','the same amount of time','in contrast','slightly outweigh'],
+      chart:{categories:['Watching TV','Playing sport','Reading','Socialising','Gaming'], men:[12,5,2,6,7], women:[10,3,5,8,3]},
+      model:[
+        "The bar chart compares the average weekly hours men and women devoted to five leisure activities in a European country in 2022.",
+        "Overall, men spent more time on television and gaming, whereas women devoted more hours to reading and socialising; time spent on sport was low for both groups.",
+        "Television was the most popular activity for both sexes, though men watched noticeably more, at 12 hours a week compared with 10 for women. Gaming showed the widest gap: men spent more than double the time that women did, 7 hours against just 3.",
+        "By contrast, women out-performed men in the more social and reflective activities. They spent 8 hours a week socialising, two more than men, and read for 5 hours, two and a half times the male figure of 2 hours. Sport was the least popular activity overall, with men (5 hours) still marginally ahead of women (3 hours)."
+      ]
+    },
+    {
+      id:'pie', code:'HỒ SƠ LUYỆN TẬP SỐ T1-03', tag:'Pie chart', title:'Electricity generation by source',
+      task:'The two pie charts below show the sources of electricity generation in a country in 2000 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
+      vocab:['account for','a dramatic decline','a sevenfold rise','make up over a third','remain unchanged','shift away from','the leading source'],
+      chart:{labels:['Coal','Gas','Nuclear','Renewables','Oil'], colors:['#1E2A4A','#A13D3D','#B8860B','#3F7A54','#8A8577'], y2000:[55,20,15,5,5], y2020:[20,25,15,35,5]},
+      model:[
+        "The two pie charts illustrate how a country's electricity was generated in 2000 compared with 2020.",
+        "Overall, the country moved away from coal towards renewable sources over the twenty-year period, while nuclear and oil contributions stayed constant.",
+        "In 2000, coal was overwhelmingly the leading source, accounting for over half of all electricity (55%), with gas a distant second at 20%. Renewables made up just 5% of the mix, the same share as oil, while nuclear power contributed 15%.",
+        "By 2020, this picture had changed considerably. Coal's share fell dramatically to only 20%, and it was overtaken by renewables, which climbed sevenfold to become the second-largest source at 35%. Gas also grew slightly, to 25%, whereas nuclear (15%) and oil (5%) remained exactly as they had been two decades earlier."
+      ]
+    },
+    {
+      id:'process', code:'HỒ SƠ LUYỆN TẬP SỐ T1-04', tag:'Process diagram', title:'Recycling plastic bottles',
+      task:'The diagram below shows the process by which plastic bottles are recycled. Summarise the information by selecting and reporting the main features. Write at least 150 words.',
+      vocab:['the first stage','following this','once X has been done','subsequently','the final stage','is then transported to','undergoes'],
+      chart:{steps:['Collection from households','Sorting by plastic type','Washing to remove labels & dirt','Shredding into small flakes','Melting and forming into pellets','Manufacturing new plastic products']},
+      model:[
+        "The diagram illustrates the six stages involved in recycling a plastic bottle, from initial collection to the manufacture of a new product.",
+        "Overall, the process is linear, beginning with the collection of used bottles and ending with the production of new plastic goods, and it involves two rounds of physical transformation: shredding and melting.",
+        "The process begins when plastic bottles are collected from households, typically via kerbside recycling schemes. These are then transported to a facility, where they are sorted according to plastic type. Once sorted, the bottles are washed to remove any remaining labels, glue and dirt.",
+        "Following this, the clean plastic is shredded into small flakes. These flakes then undergo a melting stage, after which the molten plastic is formed into small pellets. In the final stage, these pellets are used as the raw material to manufacture entirely new plastic products, completing the cycle."
+      ]
+    }
+  ];
+
+  const CRITERIA = [
+    {group:'Task Achievement', items:[
+      'Có câu overview rõ ràng nêu 2–3 xu hướng/đặc điểm nổi bật nhất',
+      'Chọn đúng số liệu quan trọng, không liệt kê hết mọi con số',
+      'Có so sánh giữa các nhóm/thời điểm khi phù hợp',
+      'Đủ tối thiểu 150 từ, không lan man dài dòng'
+    ]},
+    {group:'Coherence & Cohesion', items:[
+      'Chia đoạn rõ ràng: mở bài — overview — thân bài 1 — thân bài 2',
+      'Từ nối dùng tự nhiên, không lặp lại "moreover/furthermore" quá nhiều',
+      'Đại từ tham chiếu (this, these, it...) dùng rõ ràng, không gây hiểu nhầm'
+    ]},
+    {group:'Lexical Resource', items:[
+      'Paraphrase câu hỏi đề bài, không chép nguyên văn',
+      'Dùng từ vựng miêu tả xu hướng/tỉ lệ đa dạng, không lặp từ',
+      'Số liệu được diễn đạt chính xác (a slight rise, nearly double...)'
+    ]},
+    {group:'Grammar', items:[
+      'Kết hợp câu đơn và câu phức (mệnh đề quan hệ, so sánh, cụm phân từ)',
+      'Thì đúng ngữ cảnh (quá khứ cho số liệu lịch sử...)',
+      'Không mắc lỗi ngữ pháp cơ bản (số ít/số nhiều, giới từ, mạo từ)'
+    ]}
+  ];
+
+  let state = { answers:{}, checks:{}, revealed:{} };
+  let activeTab = EXERCISES[0].id;
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        const p = JSON.parse(raw);
+        state.answers = p.answers || {};
+        state.checks = p.checks || {};
+        state.revealed = p.revealed || {};
+      }
+    }catch(e){ console.warn('Không đọc được dữ liệu đã lưu:', e); }
+  }
+  function saveState(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch(e){ console.warn('Không lưu được tiến độ:', e); }
+  }
+
+  // ---------- Chart renderers ----------
+  function renderLineChart(d){
+    const W=760,H=250,padL=36,padR=110,padT=16,padB=28;
+    const plotW=W-padL-padR, plotH=H-padT-padB;
+    const xN=d.years.length;
+    const x=i=>padL+plotW*(i/(xN-1));
+    const y=v=>padT+plotH-(v/100)*plotH;
+    const grid=[0,25,50,75,100].map(v=>`
+      <line x1="${padL}" y1="${y(v)}" x2="${W-padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>
+      <text x="${padL-8}" y="${y(v)+3}" font-size="9.5" font-family="JetBrains Mono" fill="var(--text-muted)" text-anchor="end">${v}%</text>`).join('');
+    const xticks=d.years.map((yr,i)=>`<text x="${x(i)}" y="${H-8}" font-size="9.5" font-family="JetBrains Mono" fill="var(--text-muted)" text-anchor="middle">${yr}</text>`).join('');
+    const lines=d.series.map(s=>{
+      const pts=s.data.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
+      return `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>`;
+    }).join('');
+    const legend=d.series.map((s,i)=>`
+      <circle cx="${W-padR+14}" cy="${padT+8+i*18}" r="4" fill="${s.color}"/>
+      <text x="${W-padR+23}" y="${padT+12+i*18}" font-size="11" font-family="Inter" fill="var(--text-ink)">${s.label}</text>`).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:700px">${grid}${xticks}${lines}${legend}</svg>`;
+  }
+
+  function renderBarChart(d){
+    const W=700,H=250,padL=36,padR=14,padT=16,padB=42;
+    const plotW=W-padL-padR, plotH=H-padT-padB;
+    const n=d.categories.length, groupW=plotW/n, barW=groupW*0.32, gap=groupW*0.06;
+    const max=14;
+    const y=v=>padT+plotH-(v/max)*plotH;
+    const grid=[0,3,6,9,12].map(v=>`
+      <line x1="${padL}" y1="${y(v)}" x2="${W-padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>
+      <text x="${padL-8}" y="${y(v)+3}" font-size="9.5" font-family="JetBrains Mono" fill="var(--text-muted)" text-anchor="end">${v}h</text>`).join('');
+    let bars='';
+    d.categories.forEach((cat,i)=>{
+      const gx=padL+i*groupW;
+      const menX=gx+groupW/2-barW-gap/2;
+      const womenX=gx+groupW/2+gap/2;
+      const menV=d.men[i], womenV=d.women[i];
+      bars+=`<rect x="${menX}" y="${y(menV)}" width="${barW}" height="${plotH-(y(menV)-padT)}" fill="#1E2A4A" rx="2"/>`;
+      bars+=`<rect x="${womenX}" y="${y(womenV)}" width="${barW}" height="${plotH-(y(womenV)-padT)}" fill="#B8860B" rx="2"/>`;
+      bars+=`<text x="${gx+groupW/2}" y="${H-24}" font-size="9.5" font-family="Inter" fill="var(--text-ink)" text-anchor="middle">${cat}</text>`;
+    });
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:700px">${grid}${bars}</svg>
+      <div style="display:flex;gap:16px;margin-top:6px;font-size:11px;font-family:'Inter';color:var(--text-ink);">
+        <span><span style="display:inline-block;width:9px;height:9px;background:#1E2A4A;border-radius:2px;margin-right:5px;"></span>Men</span>
+        <span><span style="display:inline-block;width:9px;height:9px;background:#B8860B;border-radius:2px;margin-right:5px;"></span>Women</span>
+      </div>`;
+  }
+
+  function describeArc(cx,cy,r,startAngle,endAngle){
+    const rad=a=>(a-90)*Math.PI/180;
+    const x1=cx+r*Math.cos(rad(startAngle)), y1=cy+r*Math.sin(rad(startAngle));
+    const x2=cx+r*Math.cos(rad(endAngle)), y2=cy+r*Math.sin(rad(endAngle));
+    const large=endAngle-startAngle>180?1:0;
+    return `M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2} Z`;
+  }
+  function renderPie(values,colors,cx,cy,r){
+    let angle=0, paths='';
+    values.forEach((v,i)=>{
+      const sweep=v/100*360;
+      paths+=`<path d="${describeArc(cx,cy,r,angle,angle+sweep)}" fill="${colors[i]}" stroke="var(--card)" stroke-width="1.5"/>`;
+      angle+=sweep;
+    });
+    return paths;
+  }
+  function renderPieChart(d){
+    const W=700,H=300;
+    const p1=renderPie(d.y2000,d.colors,170,120,90);
+    const p2=renderPie(d.y2020,d.colors,530,120,90);
+    const legend=d.labels.map((l,i)=>`
+      <rect x="${W/2-95}" y="${218+i*16}" width="9" height="9" fill="${d.colors[i]}" rx="1"/>
+      <text x="${W/2-82}" y="${226+i*16}" font-size="10.5" font-family="Inter" fill="var(--text-ink)">${l}</text>`).join('');
+    return `<svg viewBox="0 0 ${W} 300" width="100%" style="max-width:700px">
+      ${p1}${p2}
+      <text x="170" y="228" font-size="12" font-family="JetBrains Mono" fill="var(--navy)" text-anchor="middle" font-weight="700">2000</text>
+      <text x="530" y="228" font-size="12" font-family="JetBrains Mono" fill="var(--navy)" text-anchor="middle" font-weight="700">2020</text>
+      ${legend}
+    </svg>`;
+  }
+
+  function renderProcess(d){
+    const steps=d.steps;
+    const boxW=300,boxH=44,gapY=26;
+    const H = steps.length*(boxH+gapY);
+    let content='';
+    steps.forEach((s,i)=>{
+      const y=16+i*(boxH+gapY);
+      content+=`
+        <rect x="20" y="${y}" width="${boxW}" height="${boxH}" rx="7" fill="var(--card)" stroke="#A13D3D" stroke-width="1.5"/>
+        <text x="${20+boxW/2}" y="${y+boxH/2+4}" font-size="12" font-family="Inter" fill="var(--text-ink)" text-anchor="middle">${i+1}. ${s}</text>`;
+      if(i<steps.length-1){
+        const ay=y+boxH;
+        content+=`<line x1="${20+boxW/2}" y1="${ay}" x2="${20+boxW/2}" y2="${ay+gapY-6}" stroke="#B8860B" stroke-width="2"/>
+          <polygon points="${20+boxW/2-5},${ay+gapY-6} ${20+boxW/2+5},${ay+gapY-6} ${20+boxW/2},${ay+gapY}" fill="#B8860B"/>`;
+      }
+    });
+    return `<svg viewBox="0 0 ${boxW+40} ${H}" width="100%" style="max-width:360px;margin:0 auto;display:block;">${content}</svg>`;
+  }
+
+  function renderChartFor(ex){
+    if(ex.id==='line') return renderLineChart(ex.chart);
+    if(ex.id==='bar') return renderBarChart(ex.chart);
+    if(ex.id==='pie') return renderPieChart(ex.chart);
+    if(ex.id==='process') return renderProcess(ex.chart);
+    return '';
+  }
+
+  function countWords(t){ const m=t.trim().match(/\S+/g); return m?m.length:0; }
+
+  function renderExercise(ex){
+    const answer = state.answers[ex.id] || '';
+    const wc = countWords(answer);
+    const revealed = !!state.revealed[ex.id];
+    const checks = state.checks[ex.id] || {};
+    let checkedCount=0, totalCount=0;
+    const critHtml = CRITERIA.map(group=>{
+      const itemsHtml = group.items.map((label,idx)=>{
+        const key = `${group.group}-${idx}`;
+        const isChecked = !!checks[key];
+        totalCount++; if(isChecked) checkedCount++;
+        return `<label class="crit-item ${isChecked?'checked':''}" data-critkey="${key}" data-exid="${ex.id}">
+          <input type="checkbox" ${isChecked?'checked':''} data-critkey="${key}" data-exid="${ex.id}">
+          <span>${label}</span></label>`;
+      }).join('');
+      return `<div class="crit-group"><h4>${group.group}</h4>${itemsHtml}</div>`;
+    }).join('');
+
+    const modelHtml = ex.model.map(p=>`<p>${p}</p>`).join('');
+
+    return `
+      <div class="exercise-card" data-exid="${ex.id}">
+        <div class="docket-code">${ex.code} · ${ex.tag.toUpperCase()}</div>
+        <h3 class="ex-title">${ex.title}</h3>
+        <p class="ex-task">${ex.task}</p>
+
+        <div class="chart-box">${renderChartFor(ex)}</div>
+
+        <div class="vocab">
+          <div class="vocab-title">TỪ VỰNG / CẤU TRÚC HỮU ÍCH</div>
+          <div class="vocab-list">${ex.vocab.map(v=>`<span class="vocab-chip">${v}</span>`).join('')}</div>
+        </div>
+
+        <div class="write-area">
+          <div class="write-label">
+            <span>VIẾT BÀI CỦA BẠN (≥150 TỪ)</span>
+            <span class="word-count ${wc>=150?'ok':''}" data-wcid="${ex.id}">${wc} từ</span>
+          </div>
+          <textarea data-exid="${ex.id}" placeholder="Viết bài của bạn vào đây trước khi xem bài mẫu...">${answer}</textarea>
+        </div>
+
+        <button class="reveal-btn" data-exid="${ex.id}">${revealed?'Ẩn bài mẫu':'Xem bài mẫu Band 8'}</button>
+        <div class="model-answer ${revealed?'show':''}" data-modelfor="${ex.id}">
+          <div class="model-answer-title">Bài mẫu (Band 8)</div>
+          ${modelHtml}
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">TỰ CHẤM BÀI CỦA BẠN</div>
+          ${critHtml}
+          <div class="crit-score" data-scorefor="${ex.id}"><b>${checkedCount}/${totalCount}</b> tiêu chí đạt được</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function render(){
+    const nav = document.getElementById('exNav');
+    nav.innerHTML = EXERCISES.map(e=>`<button data-tab="${e.id}" class="${e.id===activeTab?'active':''}">${e.tag}</button>`).join('');
+    const activeEx = EXERCISES.find(e=>e.id===activeTab);
+    document.getElementById('exerciseSlot').innerHTML = renderExercise(activeEx);
+    bindEvents();
+  }
+
+  function bindEvents(){
+    document.querySelectorAll('#exNav button').forEach(btn=>{
+      btn.addEventListener('click',()=>{ activeTab=btn.getAttribute('data-tab'); render(); });
+    });
+    document.querySelectorAll('textarea[data-exid]').forEach(ta=>{
+      ta.addEventListener('input',(e)=>{
+        const id=e.target.getAttribute('data-exid');
+        state.answers[id]=e.target.value;
+        const wcEl=document.querySelector(`.word-count[data-wcid="${id}"]`);
+        const wc=countWords(e.target.value);
+        if(wcEl){ wcEl.textContent=`${wc} từ`; wcEl.classList.toggle('ok', wc>=150); }
+        saveState();
+      });
+    });
+    document.querySelectorAll('.reveal-btn[data-exid]').forEach(btn=>{
+      btn.addEventListener('click',(e)=>{
+        const id=e.target.getAttribute('data-exid');
+        state.revealed[id]=!state.revealed[id];
+        saveState();
+        render();
+      });
+    });
+    document.querySelectorAll('input[type=checkbox][data-critkey]').forEach(cb=>{
+      cb.addEventListener('change',(e)=>{
+        const exid=e.target.getAttribute('data-exid');
+        const key=e.target.getAttribute('data-critkey');
+        if(!state.checks[exid]) state.checks[exid]={};
+        state.checks[exid][key]=e.target.checked;
+        saveState();
+        const label=e.target.closest('.crit-item');
+        if(label) label.classList.toggle('checked', e.target.checked);
+        const total = CRITERIA.reduce((a,g)=>a+g.items.length,0);
+        const done = Object.values(state.checks[exid]).filter(Boolean).length;
+        const scoreEl=document.querySelector(`[data-scorefor="${exid}"]`);
+        if(scoreEl) scoreEl.innerHTML=`<b>${done}/${total}</b> tiêu chí đạt được`;
+      });
+    });
+  }
+
+  loadState();
+  render();
+</script>
+</body>
+</html>

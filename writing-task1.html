@@ -2,530 +2,503 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<title>Writing Task 1 — Band 6.5 → 8.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PHÒNG LUYỆN TẬP — WRITING TASK 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#FBF8F1;
-    --paper-2:#F1EBD9;
-    --card:#FFFFFF;
-    --navy:#1E2A4A;
-    --navy-soft:#3C4A72;
-    --gold:#B8860B;
-    --gold-soft:#8A6400;
-    --gold-fill:#D9A93C;
-    --crimson:#A13D3D;
-    --sage:#3F7A54;
-    --sky:#2E6E8E;
-    --plum:#6B4E8E;
-    --text-ink:#232323;
-    --text-muted:#6B6455;
-    --line:rgba(30,42,74,0.14);
+    --paper:#EEEAE0;
+    --paper-line:#D7D0BC;
+    --card:#F8F6EE;
+    --ink:#232A2E;
+    --ink-soft:#5B6266;
+    --red:#B04A32;
+    --red-soft:#C9694F;
+    --gold:#9C7A2E;
+    --green:#4E6B52;
+    --green-soft:#E4EADD;
+    --white:#FFFFFF;
+    --radius:10px;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
   body{
-    background:
-      radial-gradient(ellipse at 15% -10%, rgba(184,134,11,0.08), transparent 45%),
-      radial-gradient(ellipse at 100% 0%, rgba(30,42,74,0.06), transparent 40%),
-      var(--paper);
-    color:var(--text-ink);
-    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-attachment: fixed;
     min-height:100vh;
-    padding:32px 16px 80px;
   }
-  .wrap{max-width:900px; margin:0 auto;}
+  .wrap{max-width:760px;margin:0 auto;padding:36px 20px 80px;}
 
-  .folder-tab{display:flex; align-items:center; gap:10px; margin-bottom:2px; flex-wrap:wrap;}
-  .tab{
-    background:var(--paper-2);
-    border:1px solid var(--line);
-    border-bottom:none;
-    padding:8px 18px 12px;
-    border-radius:8px 8px 0 0;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.12em;
-    color:var(--navy-soft);
-    text-decoration:none;
-    display:inline-block;
-    cursor:pointer;
-  }
-  .tab.active{background:var(--card); color:var(--navy); font-weight:700;}
-
-  header.dossier{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:0 10px 10px 10px;
-    padding:28px 28px 24px;
-    box-shadow:0 4px 20px rgba(30,42,74,0.06);
-  }
-  .dossier-title-eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.18em;
-    color:var(--text-muted);
-    margin-bottom:8px;
+  /* header */
+  header{margin-bottom:28px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--red);font-weight:600;margin-bottom:10px;
   }
   h1{
     font-family:'Fraunces', serif;
-    font-weight:700;
-    font-style:italic;
-    font-size:clamp(26px,4vw,36px);
-    color:var(--navy);
-    line-height:1.1;
+    font-weight:600;
+    font-size:clamp(30px,6vw,44px);
+    line-height:1.05;
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
   }
-  .subject-line{margin-top:10px; font-size:14px; color:var(--text-muted); max-width:66ch; line-height:1.55;}
-  .subject-line b{color:var(--gold-soft); font-weight:600;}
-
-  section{margin-top:36px;}
-  .section-eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.16em;
-    color:var(--gold-soft);
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:14px;
+  h1 em{font-style:italic;color:var(--red-soft);}
+  .sub{
+    color:var(--ink-soft);
+    font-size:15px;line-height:1.55;max-width:52ch;margin:0 0 24px;
   }
-  .section-eyebrow::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, rgba(184,134,11,0.4), transparent);}
-  h2.section-title{font-family:'Fraunces', serif; font-weight:600; font-size:22px; color:var(--navy); margin-bottom:4px;}
-  .section-desc{font-size:13px; color:var(--text-muted); margin-bottom:18px; max-width:64ch;}
 
-  /* ---------- EXERCISE NAV ---------- */
-  .ex-nav{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;}
-  .ex-nav button{
-    background:var(--paper-2);
-    border:1px solid var(--line);
-    color:var(--navy-soft);
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.06em;
-    padding:8px 16px;
-    border-radius:6px;
-    cursor:pointer;
-  }
-  .ex-nav button:hover{border-color:var(--gold);}
-  .ex-nav button.active{background:var(--navy); color:#F0D989; border-color:var(--navy); font-weight:700;}
-
-  /* ---------- EXERCISE CARD ---------- */
-  .exercise-card{
+  /* chart card */
+  .chart-card{
     background:var(--card);
-    border:1px solid var(--line);
-    border-left:3px solid var(--gold);
-    border-radius:6px;
-    padding:22px 24px 26px;
-    box-shadow:0 2px 10px rgba(30,42,74,0.05);
+    border:1px solid var(--paper-line);
+    border-radius:var(--radius);
+    padding:20px 22px 16px;
+    margin-bottom:22px;
+    position:relative;
   }
-  .docket-code{font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:6px;}
-  .ex-title{font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--navy); margin-bottom:12px;}
-  .ex-task{
-    font-size:13.5px; line-height:1.6; color:var(--text-ink);
-    background:var(--paper-2); border-left:3px solid var(--gold); border-radius:0 6px 6px 0;
-    padding:12px 14px; margin-bottom:20px;
+  .chart-top{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:6px;flex-wrap:wrap;gap:8px;
+  }
+  .chart-title{font-family:'Fraunces',serif;font-weight:600;font-size:16px;}
+  .chart-current{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);
+  }
+  .chart-current b{color:var(--red);font-size:16px;}
+  svg.chart{display:block;width:100%;height:auto;}
+  .chart-caption{
+    font-size:11.5px;color:var(--ink-soft);margin-top:6px;font-style:italic;
   }
 
-  .chart-box{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:20px; overflow-x:auto;}
-  .chart-box svg{display:block; margin:0 auto;}
-
-  .vocab{margin-bottom:20px;}
-  .vocab-title{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:8px;}
-  .vocab-list{display:flex; flex-wrap:wrap; gap:7px;}
-  .vocab-chip{font-size:12px; background:var(--paper-2); border:1px solid var(--line); border-radius:16px; padding:4px 11px; color:var(--navy-soft); font-family:'JetBrains Mono',monospace;}
-
-  .write-area{margin-bottom:16px;}
-  .write-label{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
-  .write-label span:first-child{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--text-muted);}
-  .word-count{font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--text-muted);}
-  .word-count.ok{color:var(--sage); font-weight:700;}
-  textarea{
-    width:100%; min-height:160px; font-family:'Inter', sans-serif; font-size:14px; line-height:1.6;
-    padding:12px 14px; border:1.5px solid var(--line); border-radius:6px; background:var(--paper); color:var(--text-ink); resize:vertical;
+  /* stats row */
+  .stats{
+    display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px;
   }
-  textarea:focus{outline:none; border-color:var(--gold);}
-
-  .reveal-btn{
-    background:var(--navy); color:#F0D989; border:none;
-    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.05em;
-    padding:11px 20px; border-radius:6px; cursor:pointer; margin-bottom:18px;
+  .stat{
+    flex:1;min-width:130px;
+    background:var(--white);
+    border:1px solid var(--paper-line);
+    border-radius:var(--radius);
+    padding:14px 16px;
   }
-  .reveal-btn:hover{background:var(--navy-soft);}
-
-  .model-answer{
-    display:none; background:var(--paper-2); border:1px dashed var(--line); border-radius:8px;
-    padding:16px 18px; margin-bottom:20px;
+  .stat .num{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:24px;color:var(--ink);
   }
-  .model-answer.show{display:block;}
-  .model-answer-title{font-family:'Fraunces', serif; font-weight:600; font-size:14px; color:var(--sage); margin-bottom:10px;}
-  .model-answer p{font-size:13.5px; line-height:1.65; margin-bottom:10px; color:var(--text-ink);}
-  .model-answer p:last-child{margin-bottom:0;}
+  .stat .lbl{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+  .progress-outer{
+    height:6px;background:var(--paper-line);border-radius:4px;overflow:hidden;margin-top:10px;
+  }
+  .progress-inner{height:100%;background:var(--red-soft);border-radius:4px;transition:width .4s ease;}
 
-  .checklist{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px 18px;}
-  .checklist-title{font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:10px;}
-  .crit-group{margin-bottom:14px;}
-  .crit-group:last-child{margin-bottom:0;}
-  .crit-group h4{font-family:'Fraunces', serif; font-size:13px; font-weight:600; margin-bottom:8px; color:var(--gold-soft);}
-  .crit-item{display:flex; align-items:flex-start; gap:8px; margin-bottom:6px; cursor:pointer;}
-  .crit-item input{margin-top:2px; width:15px; height:15px; accent-color:var(--sage); cursor:pointer; flex-shrink:0;}
-  .crit-item span{font-size:12.5px; line-height:1.4; color:var(--text-ink);}
-  .crit-item.checked span{color:var(--text-muted); text-decoration:line-through; text-decoration-color:var(--sage);}
-  .crit-score{margin-top:12px; padding-top:12px; border-top:1px solid var(--line); font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-muted);}
-  .crit-score b{color:var(--crimson); font-size:15px;}
+  /* section header */
+  .section-head{
+    display:flex;align-items:baseline;gap:10px;
+    margin:36px 0 14px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:8px;
+  }
+  .section-head .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    background:var(--ink);color:var(--paper);padding:3px 8px;border-radius:4px;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin:0;
+  }
 
-  footer{margin-top:48px; font-size:11.5px; color:var(--text-muted); text-align:center; line-height:1.6;}
-  footer code{background:var(--paper-2); padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono', monospace;}
+  /* lesson card */
+  .lesson{
+    background:var(--card);
+    border:1px solid var(--paper-line);
+    border-radius:var(--radius);
+    margin-bottom:12px;
+    overflow:hidden;
+    transition:border-color .2s ease;
+  }
+  .lesson.done{border-color:var(--green);}
+  .lesson-head{
+    display:flex;align-items:center;gap:12px;
+    padding:13px 16px;cursor:pointer;user-select:none;
+  }
+  .lesson-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;color:var(--white);background:var(--ink);
+    width:26px;height:26px;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .lesson.done .lesson-num{background:var(--green);}
+  .lesson-title{
+    font-family:'Fraunces',serif;font-weight:500;font-size:15.5px;flex:1;
+  }
+  .lesson-frac{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);flex-shrink:0;
+  }
+  .chevron{
+    width:16px;height:16px;flex-shrink:0;color:var(--ink-soft);
+    transition:transform .2s ease;
+  }
+  .lesson.open .chevron{transform:rotate(180deg);}
+  .lesson-body{
+    max-height:0;overflow:hidden;transition:max-height .25s ease;
+  }
+  .lesson.open .lesson-body{max-height:400px;}
+  .lesson-body-inner{
+    padding:0 16px 14px 54px;
+    display:flex;flex-direction:column;gap:9px;
+  }
+  .sub-item{
+    display:flex;align-items:flex-start;gap:9px;cursor:pointer;
+  }
+  .sub-item input[type=checkbox]{
+    margin-top:2px;width:16px;height:16px;accent-color:var(--red);flex-shrink:0;cursor:pointer;
+  }
+  .sub-item span{font-size:13.5px;line-height:1.4;color:var(--ink);}
+  .sub-item.checked span{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--green);}
+  .note-row{margin-top:4px;}
+  .note-row input{
+    width:100%;font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;
+    border:1px dashed var(--paper-line);background:var(--white);
+    border-radius:6px;padding:7px 10px;color:var(--ink);
+  }
+  .note-row input::placeholder{color:#B3ABA0;}
+  .note-row input:focus{outline:none;border-color:var(--red-soft);}
+
+  footer{
+    margin-top:40px;padding-top:18px;border-top:1px solid var(--paper-line);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  }
+  .reset-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);
+    background:none;border:1px solid var(--red-soft);border-radius:6px;
+    padding:8px 14px;cursor:pointer;
+  }
+  .reset-btn:hover{background:var(--red);color:var(--white);}
+  .save-state{font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;}
+
+  .loading{
+    padding:60px 0;text-align:center;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-size:13px;
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-
-  <div class="folder-tab">
-    <a class="tab" href="index.html">HỒ SƠ NHÂN VẬT</a>
-    <a class="tab" href="ielts-tracker.html">BIÊN BẢN ĐIỂM</a>
-    <a class="tab active" href="writing-task1.html">PHÒNG LUYỆN TẬP</a>
-  </div>
-
-  <header class="dossier">
-    <div class="dossier-title-eyebrow">SỐ HỒ SƠ: LRPG-003 · TASK 1 ACADEMIC WRITING</div>
-    <h1>Phòng Luyện Tập</h1>
-    <div class="subject-line">
-      Nơi luyện bài trước khi nộp vào <b>HỒ SƠ SỐ 001-C2</b>. Viết bài của bạn trước khi xem bài mẫu — thấy khoảng cách thật giữa bài viết hiện tại và band 8 hiệu quả hơn nhiều so với chỉ đọc lý thuyết.
-    </div>
-  </header>
-
-  <!-- ============ EXERCISES ============ -->
-  <section>
-    <div class="section-eyebrow">4 DẠNG BIỂU ĐỒ THƯỜNG GẶP</div>
-    <h2 class="section-title">Luyện Tập &amp; Tự Chấm</h2>
-    <p class="section-desc">Số liệu và bài mẫu là nội dung gốc, biên soạn riêng cho phòng luyện tập này — không sao chép từ bất kỳ sách nào.</p>
-
-    <div class="ex-nav" id="exNav"></div>
-    <div id="exerciseSlot"></div>
-  </section>
-
-  <footer>
-    Tiến độ &amp; bài viết được tự động lưu trên trình duyệt này (localStorage) — mở lại trang vẫn còn nguyên.<br>
-    Dữ liệu chỉ lưu trên máy này, không đồng bộ giữa các thiết bị.
-  </footer>
-
+<div class="wrap" id="app">
+  <div class="loading" id="loading">Đang tải tiến độ…</div>
 </div>
 
 <script>
-  const STORAGE_KEY = 'lifeRPG_writing_v1';
+const STORAGE_KEY = 'wt1-progress-v1';
 
-  // ---------- Original exercise data (composed for this practice room) ----------
-  const EXERCISES = [
-    {
-      id:'line', code:'HỒ SƠ LUYỆN TẬP SỐ T1-01', tag:'Line graph', title:'Social media use by age group',
-      task:'The line graph below shows the percentage of people in four age groups who used social media in a country between 2000 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
-      vocab:['rise steadily','climb sharply','a fourfold increase','remain comparatively low','overtake','plateau','a gradual upward trend','far outstrip'],
-      chart:{years:[2000,2005,2010,2015,2020],
-        series:[
-          {label:'16–24', color:'#A13D3D', data:[5,20,55,85,90]},
-          {label:'25–44', color:'#B8860B', data:[2,10,35,65,78]},
-          {label:'45–64', color:'#3F7A54', data:[1,4,15,35,52]},
-          {label:'65+',   color:'#1E2A4A', data:[0,1,4,12,25]},
-        ]},
-      model:[
-        "The line graph illustrates the proportion of four age groups in a given country who used social media between 2000 and 2020.",
-        "Overall, social media use rose sharply across all age groups over the period, although younger people consistently made up the largest share of users, while uptake among the elderly remained comparatively low throughout.",
-        "In 2000, social media was used by only a small minority, with just 5% of 16–24 year olds and negligible proportions of older groups engaging with it. From this point, usage climbed steadily in every category, though the pace of growth varied considerably. The 16–24 age group saw the fastest rise, reaching 55% by 2010 and eventually peaking at 90% in 2020.",
-        "The three older groups followed a broadly similar upward trajectory but at progressively lower levels. By 2020, 78% of 25–44 year olds and just over half of 45–64 year olds were using social media, whereas the 65-and-over group, despite a fourfold increase since 2010, still lagged furthest behind at only 25%."
-      ]
-    },
-    {
-      id:'bar', code:'HỒ SƠ LUYỆN TẬP SỐ T1-02', tag:'Bar chart', title:'Weekly leisure time by gender',
-      task:'The bar chart below shows the average number of hours per week that men and women spent on five leisure activities in a European country in 2022. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
-      vocab:['nearly double','marginally higher','a notable gap','considerably more time','the same amount of time','in contrast','slightly outweigh'],
-      chart:{categories:['Watching TV','Playing sport','Reading','Socialising','Gaming'], men:[12,5,2,6,7], women:[10,3,5,8,3]},
-      model:[
-        "The bar chart compares the average weekly hours men and women devoted to five leisure activities in a European country in 2022.",
-        "Overall, men spent more time on television and gaming, whereas women devoted more hours to reading and socialising; time spent on sport was low for both groups.",
-        "Television was the most popular activity for both sexes, though men watched noticeably more, at 12 hours a week compared with 10 for women. Gaming showed the widest gap: men spent more than double the time that women did, 7 hours against just 3.",
-        "By contrast, women out-performed men in the more social and reflective activities. They spent 8 hours a week socialising, two more than men, and read for 5 hours, two and a half times the male figure of 2 hours. Sport was the least popular activity overall, with men (5 hours) still marginally ahead of women (3 hours)."
-      ]
-    },
-    {
-      id:'pie', code:'HỒ SƠ LUYỆN TẬP SỐ T1-03', tag:'Pie chart', title:'Electricity generation by source',
-      task:'The two pie charts below show the sources of electricity generation in a country in 2000 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
-      vocab:['account for','a dramatic decline','a sevenfold rise','make up over a third','remain unchanged','shift away from','the leading source'],
-      chart:{labels:['Coal','Gas','Nuclear','Renewables','Oil'], colors:['#1E2A4A','#A13D3D','#B8860B','#3F7A54','#8A8577'], y2000:[55,20,15,5,5], y2020:[20,25,15,35,5]},
-      model:[
-        "The two pie charts illustrate how a country's electricity was generated in 2000 compared with 2020.",
-        "Overall, the country moved away from coal towards renewable sources over the twenty-year period, while nuclear and oil contributions stayed constant.",
-        "In 2000, coal was overwhelmingly the leading source, accounting for over half of all electricity (55%), with gas a distant second at 20%. Renewables made up just 5% of the mix, the same share as oil, while nuclear power contributed 15%.",
-        "By 2020, this picture had changed considerably. Coal's share fell dramatically to only 20%, and it was overtaken by renewables, which climbed sevenfold to become the second-largest source at 35%. Gas also grew slightly, to 25%, whereas nuclear (15%) and oil (5%) remained exactly as they had been two decades earlier."
-      ]
-    },
-    {
-      id:'process', code:'HỒ SƠ LUYỆN TẬP SỐ T1-04', tag:'Process diagram', title:'Recycling plastic bottles',
-      task:'The diagram below shows the process by which plastic bottles are recycled. Summarise the information by selecting and reporting the main features. Write at least 150 words.',
-      vocab:['the first stage','following this','once X has been done','subsequently','the final stage','is then transported to','undergoes'],
-      chart:{steps:['Collection from households','Sorting by plastic type','Washing to remove labels & dirt','Shredding into small flakes','Melting and forming into pellets','Manufacturing new plastic products']},
-      model:[
-        "The diagram illustrates the six stages involved in recycling a plastic bottle, from initial collection to the manufacture of a new product.",
-        "Overall, the process is linear, beginning with the collection of used bottles and ending with the production of new plastic goods, and it involves two rounds of physical transformation: shredding and melting.",
-        "The process begins when plastic bottles are collected from households, typically via kerbside recycling schemes. These are then transported to a facility, where they are sorted according to plastic type. Once sorted, the bottles are washed to remove any remaining labels, glue and dirt.",
-        "Following this, the clean plastic is shredded into small flakes. These flakes then undergo a melting stage, after which the molten plastic is formed into small pellets. In the final stage, these pellets are used as the raw material to manufacture entirely new plastic products, completing the cycle."
-      ]
+// ---- Lesson data (structure/titles only — from the book's table of contents) ----
+const SECTIONS = [
+  {
+    tag: 'SECTION 1',
+    title: 'Developing Task 1 Academic Writing Skills',
+    lessons: [
+      {n:1, title:'Task achievement', subs:['Common problems in Task 1','How and why you may be practising Band 3–5','Writing a conclusion in Task 1']},
+      {n:2, title:'Coherence and cohesion problems in Task 1', subs:['Is coherence & cohesion different in Task 1?','Coherence & cohesion between and within sentences','Lack of progression and clear organisation']},
+      {n:3, title:'Getting Started', subs:['Step 1: Noticing details','Step 2: Identifying key features','Step 3: Organising information']},
+      {n:4, title:'Introductory sentences', subs:['The introductory sentence','Paraphrasing the test question','Introducing map and plan tasks']},
+      {n:5, title:'The Overview and Highlighting Key Features', subs:['The overview','Writing a clear overview','Presenting and highlighting key features']},
+      {n:6, title:'Line Graphs', subs:['Understanding line graphs','Addressing Band 6 problems','Model answer']},
+      {n:7, title:'Map Tasks', subs:['How map tasks are different','Common problems in map tasks','Model answer']},
+      {n:8, title:'Being Precise in Map and Plan Tasks', subs:['Common language problems','Addressing band 6 problems','Model answer']},
+      {n:9, title:'Process Tasks (1)', subs:['Language used in process tasks','Coherence and cohesion','Model answer and improving short answers']},
+      {n:10, title:'Process Tasks (2)', subs:['Trends vs. steps vs. stages','Changing the language in the question','Model answer']},
+    ]
+  },
+  {
+    tag: 'SECTION 2',
+    title: 'Test Practice',
+    lessons: [
+      {n:'—', title:'Key Ideas about Test Practice', subs:['Đọc phần giới thiệu trước khi luyện đề']},
+      {n:'—', title:'Useful Practice Activities', subs:['Đọc qua các hoạt động luyện tập gợi ý']},
+      {n:11, title:'Guided Test Practice 1 — Data about People (1)', subs:['Understanding the data','Changing the language in the question','Model answer and language review']},
+      {n:12, title:'Guided Test Practice 2 — Data about People (2)', subs:['Writing about gender and age','Timed test practice + general statements','Model answer']},
+      {n:13, title:'Pie Charts, Stacked Bar Charts, and Future Predictions', subs:['Dealing with pie charts','Test practice and being precise','Model answer and stacked bar charts']},
+      {n:14, title:'Frequency and Grouping Information Logically', subs:['Describing frequency','Grouping information logically','Model answer']},
+      {n:15, title:'Data about Energy and Problems', subs:['Data about energy','Model answer','Cause and effect in Task 1']},
+      {n:16, title:'Reviewing Process Tasks', subs:['Dealing with technical details','Test practice 1: Energy','Test practice 2: Life cycle']},
+      {n:17, title:'Review of Map Tasks and Task 1', subs:['Reviewing map and plan tasks','A "user approach" to maps and plans','Review of Task 1 language and style']},
+      {n:18, title:'Timed Test Practice 1', subs:['Test practice 1 — Bar chart','Test practice 2 & 3 — Map task and pie charts','Model answers, points to notice, key features']},
+      {n:19, title:'Timed Test Practice 2', subs:['Test practice 4 — A table','Test practice 5 — A process task','Test practice 6 — A line graph']},
+      {n:20, title:'Timed Test Practice 3', subs:['Test practice 7 — A bar chart','Test practice 8 — A process task','Test practice 9 — A stacked bar chart']},
+    ]
+  }
+];
+
+// flat id list for storage
+function subId(sIdx, lIdx, subIdx){ return `s${sIdx}-l${lIdx}-i${subIdx}`; }
+function noteId(sIdx, lIdx){ return `s${sIdx}-l${lIdx}-note`; }
+
+let state = { checked:{}, notes:{}, open:{} };
+
+async function loadState(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    if(res && res.value){
+      const parsed = JSON.parse(res.value);
+      state.checked = parsed.checked || {};
+      state.notes = parsed.notes || {};
     }
-  ];
+  }catch(e){ /* no saved data yet */ }
+}
 
-  const CRITERIA = [
-    {group:'Task Achievement', items:[
-      'Có câu overview rõ ràng nêu 2–3 xu hướng/đặc điểm nổi bật nhất',
-      'Chọn đúng số liệu quan trọng, không liệt kê hết mọi con số',
-      'Có so sánh giữa các nhóm/thời điểm khi phù hợp',
-      'Đủ tối thiểu 150 từ, không lan man dài dòng'
-    ]},
-    {group:'Coherence & Cohesion', items:[
-      'Chia đoạn rõ ràng: mở bài — overview — thân bài 1 — thân bài 2',
-      'Từ nối dùng tự nhiên, không lặp lại "moreover/furthermore" quá nhiều',
-      'Đại từ tham chiếu (this, these, it...) dùng rõ ràng, không gây hiểu nhầm'
-    ]},
-    {group:'Lexical Resource', items:[
-      'Paraphrase câu hỏi đề bài, không chép nguyên văn',
-      'Dùng từ vựng miêu tả xu hướng/tỉ lệ đa dạng, không lặp từ',
-      'Số liệu được diễn đạt chính xác (a slight rise, nearly double...)'
-    ]},
-    {group:'Grammar', items:[
-      'Kết hợp câu đơn và câu phức (mệnh đề quan hệ, so sánh, cụm phân từ)',
-      'Thì đúng ngữ cảnh (quá khứ cho số liệu lịch sử...)',
-      'Không mắc lỗi ngữ pháp cơ bản (số ít/số nhiều, giới từ, mạo từ)'
-    ]}
-  ];
-
-  let state = { answers:{}, checks:{}, revealed:{} };
-  let activeTab = EXERCISES[0].id;
-
-  function loadState(){
+let saveTimer = null;
+function saveState(){
+  const el = document.getElementById('save-indicator');
+  if(el) el.textContent = 'Đang lưu…';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
     try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(raw){
-        const p = JSON.parse(raw);
-        state.answers = p.answers || {};
-        state.checks = p.checks || {};
-        state.revealed = p.revealed || {};
-      }
-    }catch(e){ console.warn('Không đọc được dữ liệu đã lưu:', e); }
-  }
-  function saveState(){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-    catch(e){ console.warn('Không lưu được tiến độ:', e); }
-  }
+      await window.storage.set(STORAGE_KEY, JSON.stringify({checked:state.checked, notes:state.notes}), false);
+      if(el) el.textContent = 'Đã lưu ✓';
+    }catch(e){
+      if(el) el.textContent = 'Lỗi lưu — thử lại';
+    }
+  }, 300);
+}
 
-  // ---------- Chart renderers ----------
-  function renderLineChart(d){
-    const W=760,H=250,padL=36,padR=110,padT=16,padB=28;
-    const plotW=W-padL-padR, plotH=H-padT-padB;
-    const xN=d.years.length;
-    const x=i=>padL+plotW*(i/(xN-1));
-    const y=v=>padT+plotH-(v/100)*plotH;
-    const grid=[0,25,50,75,100].map(v=>`
-      <line x1="${padL}" y1="${y(v)}" x2="${W-padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>
-      <text x="${padL-8}" y="${y(v)+3}" font-size="9.5" font-family="JetBrains Mono" fill="var(--text-muted)" text-anchor="end">${v}%</text>`).join('');
-    const xticks=d.years.map((yr,i)=>`<text x="${x(i)}" y="${H-8}" font-size="9.5" font-family="JetBrains Mono" fill="var(--text-muted)" text-anchor="middle">${yr}</text>`).join('');
-    const lines=d.series.map(s=>{
-      const pts=s.data.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
-      return `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>`;
-    }).join('');
-    const legend=d.series.map((s,i)=>`
-      <circle cx="${W-padR+14}" cy="${padT+8+i*18}" r="4" fill="${s.color}"/>
-      <text x="${W-padR+23}" y="${padT+12+i*18}" font-size="11" font-family="Inter" fill="var(--text-ink)">${s.label}</text>`).join('');
-    return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:700px">${grid}${xticks}${lines}${legend}</svg>`;
-  }
-
-  function renderBarChart(d){
-    const W=700,H=250,padL=36,padR=14,padT=16,padB=42;
-    const plotW=W-padL-padR, plotH=H-padT-padB;
-    const n=d.categories.length, groupW=plotW/n, barW=groupW*0.32, gap=groupW*0.06;
-    const max=14;
-    const y=v=>padT+plotH-(v/max)*plotH;
-    const grid=[0,3,6,9,12].map(v=>`
-      <line x1="${padL}" y1="${y(v)}" x2="${W-padR}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>
-      <text x="${padL-8}" y="${y(v)+3}" font-size="9.5" font-family="JetBrains Mono" fill="var(--text-muted)" text-anchor="end">${v}h</text>`).join('');
-    let bars='';
-    d.categories.forEach((cat,i)=>{
-      const gx=padL+i*groupW;
-      const menX=gx+groupW/2-barW-gap/2;
-      const womenX=gx+groupW/2+gap/2;
-      const menV=d.men[i], womenV=d.women[i];
-      bars+=`<rect x="${menX}" y="${y(menV)}" width="${barW}" height="${plotH-(y(menV)-padT)}" fill="#1E2A4A" rx="2"/>`;
-      bars+=`<rect x="${womenX}" y="${y(womenV)}" width="${barW}" height="${plotH-(y(womenV)-padT)}" fill="#B8860B" rx="2"/>`;
-      bars+=`<text x="${gx+groupW/2}" y="${H-24}" font-size="9.5" font-family="Inter" fill="var(--text-ink)" text-anchor="middle">${cat}</text>`;
+function totalCounts(){
+  let total=0, done=0;
+  SECTIONS.forEach((sec,sIdx)=>{
+    sec.lessons.forEach((lesson,lIdx)=>{
+      lesson.subs.forEach((_,subIdx)=>{
+        total++;
+        if(state.checked[subId(sIdx,lIdx,subIdx)]) done++;
+      });
     });
-    return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:700px">${grid}${bars}</svg>
-      <div style="display:flex;gap:16px;margin-top:6px;font-size:11px;font-family:'Inter';color:var(--text-ink);">
-        <span><span style="display:inline-block;width:9px;height:9px;background:#1E2A4A;border-radius:2px;margin-right:5px;"></span>Men</span>
-        <span><span style="display:inline-block;width:9px;height:9px;background:#B8860B;border-radius:2px;margin-right:5px;"></span>Women</span>
-      </div>`;
-  }
+  });
+  return {total, done};
+}
 
-  function describeArc(cx,cy,r,startAngle,endAngle){
-    const rad=a=>(a-90)*Math.PI/180;
-    const x1=cx+r*Math.cos(rad(startAngle)), y1=cy+r*Math.sin(rad(startAngle));
-    const x2=cx+r*Math.cos(rad(endAngle)), y2=cy+r*Math.sin(rad(endAngle));
-    const large=endAngle-startAngle>180?1:0;
-    return `M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2} Z`;
-  }
-  function renderPie(values,colors,cx,cy,r){
-    let angle=0, paths='';
-    values.forEach((v,i)=>{
-      const sweep=v/100*360;
-      paths+=`<path d="${describeArc(cx,cy,r,angle,angle+sweep)}" fill="${colors[i]}" stroke="var(--card)" stroke-width="1.5"/>`;
-      angle+=sweep;
+// per-lesson completion ratio, only for the 20 numbered lessons (for the chart x-axis)
+function lessonRatios(){
+  const ratios = [];
+  SECTIONS.forEach((sec,sIdx)=>{
+    sec.lessons.forEach((lesson,lIdx)=>{
+      if(typeof lesson.n !== 'number') return;
+      let done=0;
+      lesson.subs.forEach((_,subIdx)=>{ if(state.checked[subId(sIdx,lIdx,subIdx)]) done++; });
+      ratios.push({n:lesson.n, ratio: done/lesson.subs.length});
     });
-    return paths;
-  }
-  function renderPieChart(d){
-    const W=700,H=300;
-    const p1=renderPie(d.y2000,d.colors,170,120,90);
-    const p2=renderPie(d.y2020,d.colors,530,120,90);
-    const legend=d.labels.map((l,i)=>`
-      <rect x="${W/2-95}" y="${218+i*16}" width="9" height="9" fill="${d.colors[i]}" rx="1"/>
-      <text x="${W/2-82}" y="${226+i*16}" font-size="10.5" font-family="Inter" fill="var(--text-ink)">${l}</text>`).join('');
-    return `<svg viewBox="0 0 ${W} 300" width="100%" style="max-width:700px">
-      ${p1}${p2}
-      <text x="170" y="228" font-size="12" font-family="JetBrains Mono" fill="var(--navy)" text-anchor="middle" font-weight="700">2000</text>
-      <text x="530" y="228" font-size="12" font-family="JetBrains Mono" fill="var(--navy)" text-anchor="middle" font-weight="700">2020</text>
-      ${legend}
-    </svg>`;
-  }
+  });
+  return ratios.sort((a,b)=>a.n-b.n);
+}
 
-  function renderProcess(d){
-    const steps=d.steps;
-    const boxW=300,boxH=44,gapY=26;
-    const H = steps.length*(boxH+gapY);
-    let content='';
-    steps.forEach((s,i)=>{
-      const y=16+i*(boxH+gapY);
-      content+=`
-        <rect x="20" y="${y}" width="${boxW}" height="${boxH}" rx="7" fill="var(--card)" stroke="#A13D3D" stroke-width="1.5"/>
-        <text x="${20+boxW/2}" y="${y+boxH/2+4}" font-size="12" font-family="Inter" fill="var(--text-ink)" text-anchor="middle">${i+1}. ${s}</text>`;
-      if(i<steps.length-1){
-        const ay=y+boxH;
-        content+=`<line x1="${20+boxW/2}" y1="${ay}" x2="${20+boxW/2}" y2="${ay+gapY-6}" stroke="#B8860B" stroke-width="2"/>
-          <polygon points="${20+boxW/2-5},${ay+gapY-6} ${20+boxW/2+5},${ay+gapY-6} ${20+boxW/2},${ay+gapY}" fill="#B8860B"/>`;
-      }
-    });
-    return `<svg viewBox="0 0 ${boxW+40} ${H}" width="100%" style="max-width:360px;margin:0 auto;display:block;">${content}</svg>`;
-  }
+function renderChart(){
+  const ratios = lessonRatios();
+  const W=680, H=170, padL=38, padR=14, padT=14, padB=26;
+  const plotW = W-padL-padR, plotH = H-padT-padB;
+  const n = ratios.length;
+  const bandFor = (cumRatio) => 6.5 + cumRatio*1.5;
 
-  function renderChartFor(ex){
-    if(ex.id==='line') return renderLineChart(ex.chart);
-    if(ex.id==='bar') return renderBarChart(ex.chart);
-    if(ex.id==='pie') return renderPieChart(ex.chart);
-    if(ex.id==='process') return renderProcess(ex.chart);
-    return '';
-  }
+  // cumulative average completion up to each lesson gives a smoother climbing line
+  let running = 0, points = [];
+  ratios.forEach((r,i)=>{
+    running += r.ratio;
+    const avgSoFar = running/(i+1);
+    const x = padL + (plotW*(i/(n-1)));
+    const y = padT + plotH - (avgSoFar*plotH);
+    points.push([x,y]);
+  });
 
-  function countWords(t){ const m=t.trim().match(/\S+/g); return m?m.length:0; }
+  const path = points.map((p,i)=> (i===0?'M':'L')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const lastPoint = points[points.length-1];
+  const {total,done} = totalCounts();
+  const overallRatio = total? done/total : 0;
+  const currentBand = (6.5 + overallRatio*1.5).toFixed(1);
 
-  function renderExercise(ex){
-    const answer = state.answers[ex.id] || '';
-    const wc = countWords(answer);
-    const revealed = !!state.revealed[ex.id];
-    const checks = state.checks[ex.id] || {};
-    let checkedCount=0, totalCount=0;
-    const critHtml = CRITERIA.map(group=>{
-      const itemsHtml = group.items.map((label,idx)=>{
-        const key = `${group.group}-${idx}`;
-        const isChecked = !!checks[key];
-        totalCount++; if(isChecked) checkedCount++;
-        return `<label class="crit-item ${isChecked?'checked':''}" data-critkey="${key}" data-exid="${ex.id}">
-          <input type="checkbox" ${isChecked?'checked':''} data-critkey="${key}" data-exid="${ex.id}">
-          <span>${label}</span></label>`;
-      }).join('');
-      return `<div class="crit-group"><h4>${group.group}</h4>${itemsHtml}</div>`;
-    }).join('');
+  const gridLines = [0,0.25,0.5,0.75,1].map(f=>{
+    const y = padT + plotH - f*plotH;
+    const label = (6.5+f*1.5).toFixed(1);
+    return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--paper-line)" stroke-width="1"/>
+      <text x="${padL-8}" y="${y+3}" font-size="9.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-soft)" text-anchor="end">${label}</text>`;
+  }).join('');
 
-    const modelHtml = ex.model.map(p=>`<p>${p}</p>`).join('');
+  const xTicks = [1,5,10,15,20].map(lessonN=>{
+    const idx = ratios.findIndex(r=>r.n===lessonN);
+    if(idx<0) return '';
+    const x = padL + (plotW*(idx/(n-1)));
+    return `<text x="${x}" y="${H-6}" font-size="9.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-soft)" text-anchor="middle">L${lessonN}</text>`;
+  }).join('');
 
+  return `
+  <div class="chart-top">
+    <div class="chart-title">Biểu đồ tiến độ (Band 6.5 → 8.0)</div>
+    <div class="chart-current">Hiện tại: <b>~${currentBand}</b> · ${done}/${total} mục</div>
+  </div>
+  <svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+    ${gridLines}
+    ${xTicks}
+    <path d="${path}" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    ${lastPoint ? `<circle cx="${lastPoint[0]}" cy="${lastPoint[1]}" r="4.5" fill="var(--red)" stroke="var(--card)" stroke-width="2"/>` : ''}
+  </svg>
+  <div class="chart-caption">* Đường minh hoạ động lực dựa trên % hoàn thành checklist, không phải điểm dự đoán chính thức.</div>
+  `;
+}
+
+function renderStats(){
+  const {total,done} = totalCounts();
+  const pct = total? Math.round((done/total)*100) : 0;
+  return `
+    <div class="stat">
+      <div class="num">${done}/${total}</div>
+      <div class="lbl">Mục đã hoàn thành</div>
+    </div>
+    <div class="stat">
+      <div class="num">${pct}%</div>
+      <div class="lbl">Toàn bộ sách</div>
+      <div class="progress-outer"><div class="progress-inner" style="width:${pct}%"></div></div>
+    </div>
+  `;
+}
+
+function renderLesson(sec, sIdx, lesson, lIdx){
+  const doneCount = lesson.subs.filter((_,subIdx)=>state.checked[subId(sIdx,lIdx,subIdx)]).length;
+  const isDone = doneCount===lesson.subs.length;
+  const openKey = `s${sIdx}-l${lIdx}`;
+  const isOpen = !!state.open[openKey];
+  const nId = noteId(sIdx,lIdx);
+  const noteVal = state.notes[nId] || '';
+
+  const subsHtml = lesson.subs.map((label,subIdx)=>{
+    const id = subId(sIdx,lIdx,subIdx);
+    const checked = !!state.checked[id];
     return `
-      <div class="exercise-card" data-exid="${ex.id}">
-        <div class="docket-code">${ex.code} · ${ex.tag.toUpperCase()}</div>
-        <h3 class="ex-title">${ex.title}</h3>
-        <p class="ex-task">${ex.task}</p>
+      <label class="sub-item ${checked?'checked':''}" data-subid="${id}">
+        <input type="checkbox" ${checked?'checked':''} data-subid="${id}">
+        <span>${label}</span>
+      </label>`;
+  }).join('');
 
-        <div class="chart-box">${renderChartFor(ex)}</div>
-
-        <div class="vocab">
-          <div class="vocab-title">TỪ VỰNG / CẤU TRÚC HỮU ÍCH</div>
-          <div class="vocab-list">${ex.vocab.map(v=>`<span class="vocab-chip">${v}</span>`).join('')}</div>
-        </div>
-
-        <div class="write-area">
-          <div class="write-label">
-            <span>VIẾT BÀI CỦA BẠN (≥150 TỪ)</span>
-            <span class="word-count ${wc>=150?'ok':''}" data-wcid="${ex.id}">${wc} từ</span>
+  return `
+    <div class="lesson ${isDone?'done':''} ${isOpen?'open':''}" data-lessonkey="${openKey}">
+      <div class="lesson-head" data-lessonkey="${openKey}">
+        <div class="lesson-num">${lesson.n}</div>
+        <div class="lesson-title">${lesson.title}</div>
+        <div class="lesson-frac">${doneCount}/${lesson.subs.length}</div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-body-inner">
+          ${subsHtml}
+          <div class="note-row">
+            <input type="text" placeholder="Ghi chú riêng (từ vựng cần học, lỗi hay mắc...)" data-noteid="${nId}" value="${noteVal.replace(/"/g,'&quot;')}">
           </div>
-          <textarea data-exid="${ex.id}" placeholder="Viết bài của bạn vào đây trước khi xem bài mẫu...">${answer}</textarea>
-        </div>
-
-        <button class="reveal-btn" data-exid="${ex.id}">${revealed?'Ẩn bài mẫu':'Xem bài mẫu Band 8'}</button>
-        <div class="model-answer ${revealed?'show':''}" data-modelfor="${ex.id}">
-          <div class="model-answer-title">Bài mẫu (Band 8)</div>
-          ${modelHtml}
-        </div>
-
-        <div class="checklist">
-          <div class="checklist-title">TỰ CHẤM BÀI CỦA BẠN</div>
-          ${critHtml}
-          <div class="crit-score" data-scorefor="${ex.id}"><b>${checkedCount}/${totalCount}</b> tiêu chí đạt được</div>
         </div>
       </div>
-    `;
-  }
+    </div>
+  `;
+}
 
-  function render(){
-    const nav = document.getElementById('exNav');
-    nav.innerHTML = EXERCISES.map(e=>`<button data-tab="${e.id}" class="${e.id===activeTab?'active':''}">${e.tag}</button>`).join('');
-    const activeEx = EXERCISES.find(e=>e.id===activeTab);
-    document.getElementById('exerciseSlot').innerHTML = renderExercise(activeEx);
-    bindEvents();
-  }
+function renderSection(sec, sIdx){
+  return `
+    <div class="section-head">
+      <span class="tag">${sec.tag}</span>
+      <h2>${sec.title}</h2>
+    </div>
+    ${sec.lessons.map((lesson,lIdx)=>renderLesson(sec,sIdx,lesson,lIdx)).join('')}
+  `;
+}
 
-  function bindEvents(){
-    document.querySelectorAll('#exNav button').forEach(btn=>{
-      btn.addEventListener('click',()=>{ activeTab=btn.getAttribute('data-tab'); render(); });
+function render(){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <header>
+      <div class="eyebrow">Writing Task 1 · The Key to IELTS</div>
+      <h1>Từ Band 6.5 lên <em>8.0</em></h1>
+      <p class="sub">Theo dõi tiến độ đọc &amp; luyện tập theo từng Lesson trong sách. Tick khi hoàn thành để thấy đường tiến độ đi lên.</p>
+    </header>
+
+    <div class="chart-card" id="chart-card">${renderChart()}</div>
+
+    <div class="stats">${renderStats()}</div>
+
+    ${SECTIONS.map((sec,sIdx)=>renderSection(sec,sIdx)).join('')}
+
+    <footer>
+      <button class="reset-btn" id="reset-btn">Xoá toàn bộ tiến độ</button>
+      <span class="save-state" id="save-indicator">Đã lưu ✓</span>
+    </footer>
+  `;
+
+  // checkbox handlers
+  app.querySelectorAll('input[type=checkbox][data-subid]').forEach(cb=>{
+    cb.addEventListener('change', (e)=>{
+      const id = e.target.getAttribute('data-subid');
+      state.checked[id] = e.target.checked;
+      saveState();
+      rerenderPartial();
     });
-    document.querySelectorAll('textarea[data-exid]').forEach(ta=>{
-      ta.addEventListener('input',(e)=>{
-        const id=e.target.getAttribute('data-exid');
-        state.answers[id]=e.target.value;
-        const wcEl=document.querySelector(`.word-count[data-wcid="${id}"]`);
-        const wc=countWords(e.target.value);
-        if(wcEl){ wcEl.textContent=`${wc} từ`; wcEl.classList.toggle('ok', wc>=150); }
-        saveState();
-      });
+  });
+
+  // note handlers
+  app.querySelectorAll('input[data-noteid]').forEach(inp=>{
+    inp.addEventListener('input', (e)=>{
+      const id = e.target.getAttribute('data-noteid');
+      state.notes[id] = e.target.value;
+      saveState();
     });
-    document.querySelectorAll('.reveal-btn[data-exid]').forEach(btn=>{
-      btn.addEventListener('click',(e)=>{
-        const id=e.target.getAttribute('data-exid');
-        state.revealed[id]=!state.revealed[id];
+    inp.addEventListener('click', e=>e.stopPropagation());
+  });
+
+  // lesson expand/collapse
+  app.querySelectorAll('.lesson-head').forEach(head=>{
+    head.addEventListener('click', (e)=>{
+      const key = head.getAttribute('data-lessonkey');
+      state.open[key] = !state.open[key];
+      render();
+    });
+  });
+
+  // reset
+  const resetBtn = document.getElementById('reset-btn');
+  if(resetBtn){
+    resetBtn.addEventListener('click', async ()=>{
+      if(confirm('Xoá toàn bộ tiến độ đã lưu? Hành động này không thể hoàn tác.')){
+        state = {checked:{}, notes:{}, open:{}};
         saveState();
         render();
-      });
-    });
-    document.querySelectorAll('input[type=checkbox][data-critkey]').forEach(cb=>{
-      cb.addEventListener('change',(e)=>{
-        const exid=e.target.getAttribute('data-exid');
-        const key=e.target.getAttribute('data-critkey');
-        if(!state.checks[exid]) state.checks[exid]={};
-        state.checks[exid][key]=e.target.checked;
-        saveState();
-        const label=e.target.closest('.crit-item');
-        if(label) label.classList.toggle('checked', e.target.checked);
-        const total = CRITERIA.reduce((a,g)=>a+g.items.length,0);
-        const done = Object.values(state.checks[exid]).filter(Boolean).length;
-        const scoreEl=document.querySelector(`[data-scorefor="${exid}"]`);
-        if(scoreEl) scoreEl.innerHTML=`<b>${done}/${total}</b> tiêu chí đạt được`;
-      });
+      }
     });
   }
+}
 
-  loadState();
+// lighter re-render for just chart+stats after a checkbox toggle (avoid losing open state / focus)
+function rerenderPartial(){
+  const chartCard = document.getElementById('chart-card');
+  if(chartCard) chartCard.innerHTML = renderChart();
+  const statsEls = document.querySelectorAll('.stats')[0];
+  if(statsEls) statsEls.innerHTML = renderStats();
+  // update lesson done-state classes and fractions without full re-render
+  document.querySelectorAll('.lesson').forEach(lessonEl=>{
+    const key = lessonEl.getAttribute('data-lessonkey');
+    const [sIdx,lIdx] = key.replace('s','').split('-l').map(Number);
+    const lesson = SECTIONS[sIdx].lessons[lIdx];
+    const doneCount = lesson.subs.filter((_,subIdx)=>state.checked[subId(sIdx,lIdx,subIdx)]).length;
+    lessonEl.classList.toggle('done', doneCount===lesson.subs.length);
+    const frac = lessonEl.querySelector('.lesson-frac');
+    if(frac) frac.textContent = `${doneCount}/${lesson.subs.length}`;
+    lessonEl.querySelectorAll('.sub-item').forEach(item=>{
+      const id = item.getAttribute('data-subid');
+      item.classList.toggle('checked', !!state.checked[id]);
+    });
+  });
+}
+
+(async function init(){
+  await loadState();
   render();
+})();
 </script>
 </body>
 </html>
